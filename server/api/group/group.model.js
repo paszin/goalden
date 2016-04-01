@@ -6,7 +6,10 @@ var mongoose = require('mongoose'),
 var GroupSchema = new Schema({
   name: String,
   date: Date,
-  location: String,
+  address: String,
+  city: String,
+  state: String,
+  zipCode: String,
   participants: [String]
 });
 

@@ -4,6 +4,7 @@ var _ = require('lodash');
 var underscore = require('underscore');
 var Group = require('./group.model');
 var User = require('../user/user.model');
+var request = require("request");
 
 // Get a list of groups a given user is registered for
 exports.index = function(req, res) {
@@ -127,6 +128,43 @@ exports.destroy = function(req, res) {
       }
       return res.status(204).send('No Content');
     });
+  });
+};
+
+// Get a list of groups within specific distance from location
+exports.listByloc = function(req, res) {
+  var userZipCode = 0;
+  User.findById(req.params.uid, function(err, user) {
+    if (err) return next(err);
+    if (!user) return res.status(401).send('Unauthorized');
+    userZipCode = user.zip_code;
+    console.log('Users zipCode is ' + userZipCode);
+    if (userZipCode > 0) {
+      Group.find(function (err, groups) {
+        var selectedGroups = [];
+        if (err) {
+          return handleError(res, err);
+        }
+        for (var i = 0; i < groups.length; i++) {
+          request({
+            uri: "http://maps.googleapis.com/maps/api/distancematrix/json",
+            method: "GET",
+            key: 'AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q',
+            units: 'imperial',
+            origins: userZipCode,
+            destinations: groups[i].zipCode,
+          }, function(error, response, body) {
+            console.log('body from google api call ' + body);
+            var distanceTxt = body.rows[0].elements[0].distance.text;
+            var distance = parseFloat(distanceTxt.split(" ")[0]);
+            if (distance < 30) {
+              selectedGroups.push(groups[i]);
+            }
+          });
+        }
+        return res.status(200).json(selectedGroups);
+      });
+    }
   });
 };
 
