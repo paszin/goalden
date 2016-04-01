@@ -51,14 +51,14 @@ exports.update = function(req, res) {
 
 // add this user to the group
 exports.addUser = function(req, res) {
-  // req.params.gid
-  // req.params.uid
   if(req.body._id) { delete req.body._id; }
-  Group.findById(req.params.id, function (err, group) {
+  Group.findById(req.params.gid, function (err, group) {
     if (err) { return handleError(res, err); }
     if(!group) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(group, req.body);
-    updated.save(function (err) {
+    var thisUser = [];
+    thisUser.push(req.params.uid);
+    group.participants = underscore.union(group.participants, thisUser);
+    group.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(group);
     });
