@@ -13,7 +13,7 @@
             <h4>Your Soccer Profile</h4>
             <div layout="row" layout-margin class="md-primary">
                 <label>Level</label>
-                <i ng-repeat="s in [] | range: max_skill_level" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
+                <i ng-repeat="s in [] | range: max_skill_level" style="color: orange" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
                 <!--starts from 0 -->
             </div>
             <div layout="row" layout-align="start center" layout-margin>
@@ -52,7 +52,9 @@
                 <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
             </md-input-container>
 
-            <div layout="row" layout-align="start center" layout-margin>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-female"></i>
+                <i class="fa fa-male"></i>
                 <md-input-container>
                     <label>Gender</label>
                     <md-select ng-model="profile.sex">
@@ -61,7 +63,8 @@
                 </md-input-container>
             </div>
 
-            <div>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-language"></i>
                 <md-input-container>
                     <label>Languages</label>
                     <md-select ng-model="profile.languages" multiple>
@@ -70,7 +73,8 @@
                 </md-input-container>
             </div>
 
-            <div>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-map-marker"></i>
                 <md-input-container>
                     <label>ZIP Code</label>
                     <input ng-model="profile.zip_code" type="text">
