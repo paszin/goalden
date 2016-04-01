@@ -11,7 +11,7 @@
 
         <section layout="column">
             <h4>Your Soccer Profile</h4>
-            <div layout="row" layout-margin>
+            <div layout="row" layout-margin class="md-primary">
                 <label>Level</label>
                 <i ng-repeat="s in [] | range: max_skill_level" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
                 <!--starts from 0 -->
@@ -27,18 +27,20 @@
         </section>
 
         <section>
-            <h4>contact</h4>
-            <p>phone</p>
-            <p>mail</p>
-        </section>
-
-
-        <section>
-            <h4>Availability</h4>
-            <div layout="row" layout-align="center center" layout-wrap>
-                <md-button ng-repeat="day in profile.timetable" class="md-fab md-mini" ng-class="{true: '', false: ''}[day.checked]" aria-label="available {{day}}">
-                    <bold>M</bold>
-                </md-button>
+            <h4>Contact</h4>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-phone fa-1x"></i>
+                <md-input-container>
+                    <label>Phone</label>
+                    <input ng-model="profile.phone" type="text">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-envelope fa-1x"></i>
+                <md-input-container>
+                    <label>E-Mail</label>
+                    <input ng-model="profile.email" type="text">
+                </md-input-container>
             </div>
 
         </section>
@@ -76,6 +78,19 @@
             </div>
 
         </section>
+
+
+        <section>
+            <h4>Availability</h4>
+            <div layout="row" layout-align="center center" layout-wrap>
+                <md-button md-no-ink ng-repeat="day in profile.timetable" md-theme="altTheme" class="md-fab md-mini md-primary" ng-class="{true: 'md-hue-1', false: 'md-hue-3'}[day.checked]" aria-label="available {{day}}" ng-click="updateDay(day)">
+                    <bold>{{firstLetter(day.day)}}</bold>
+                </md-button>
+            </div>
+
+        </section>
+
+
 
         <section>
             <h4>Search</h4>
