@@ -49,7 +49,7 @@
             <h4>Personal</h4>
             <md-input-container class="md-block">
                 <label>Introduction</label>
-                <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
             </md-input-container>
 
             <div layout="row" layout-align="start start" layout-margin>
@@ -77,9 +77,13 @@
                 <i class="fa fa-map-marker"></i>
                 <md-input-container>
                     <label>ZIP Code</label>
-                    <input ng-model="profile.zip_code" type="text">
+                    <input name="postalCode" ng-model="profile.zip_code" placeholder="12345" required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
                 </md-input-container>
-            </div>
+                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                    <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                    <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
+                    </div>
+                </div>
 
         </section>
 
@@ -94,6 +98,13 @@
 
         </section>
 
+        <section>
+            <h4>Special Needs</h4>
+            <md-input-container>
+                <textarea rows="3"></textarea>
+            </md-input-container>
+        </section>
+
 
 
         <section>
@@ -101,5 +112,5 @@
             <p>Looking for similar players.</p>
         </section>
 
-    </div>
+        </div>
 </md-content>
