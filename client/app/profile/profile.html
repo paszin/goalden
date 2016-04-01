@@ -1,0 +1,40 @@
+<div ng-include="'components/shell/shell.html'"></div>
+
+
+<div>
+
+
+    <div layout="row" layout-align="center center" layout-margin>
+        <img width="100px" height="100px" layout-margin ng-src="{{imgUrl}}" class="profile-avatar" />
+        <div>
+            <h1>Hey {{profile.name}}!</h1>
+        </div>
+    </div>
+
+    <section>
+        <h4>Your Skilllevel</h4>
+        <i ng-repeat="s in skillarray" class="fa fa-star"></i>
+        <i ng-repeat="s in skillarray" class="fa fa-star-o"></i>
+    </section>
+
+
+    <section>
+        <h4>Your Timetable</h4>
+        <md-checkbox ng-repeat="(day, ok) in profile.timetable" ng-model="ok">{{day}}</md-checkbox>
+    </section>
+
+    <section>
+        <h4>Personal</h4>
+        <md-input-container class="md-block">
+            <label>Introduction</label>
+            <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+
+        <md-input-container>
+            <label>ZIP Code</label>
+            <input ng-model="profile.zip_code" type="text">
+        </md-input-container>
+
+    </section>
+
+</div>
