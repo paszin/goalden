@@ -22,6 +22,22 @@ exports.index = function(req, res) {
   });
 };
 
+// get a list of groups happening on the days a user checked
+exports.findByCal = function(req, res) {
+  var uid = req.params.uid;
+  Group.find(function(err, groups) {
+    var selectedGroups = [];
+    if (err) {
+      return handleError(res, err);
+    }
+
+    User.find(uid, function(err, docs) {
+      return res.json(docs);
+    });
+
+  });
+};
+
 // Get a single group
 exports.show = function(req, res) {
   Group.findById(req.params.id, function(err, group) {
