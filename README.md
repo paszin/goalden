@@ -6,7 +6,7 @@ required some basics like Node, mongoDB, npm, bower, grunt ...
 run `npm install` `bower install` `mongod` `grunt serve`
 
 
-### Resources
+### Ressources
 
 Icon set http://fontawesome.bootstrapcheatsheets.com/
 
