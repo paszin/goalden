@@ -5,6 +5,7 @@ var underscore = require('underscore');
 var Group = require('./group.model');
 var User = require('../user/user.model');
 var request = require("request");
+var moment = require("moment");
 
 // Get a list of groups a given user is registered for
 exports.index = function(req, res) {
@@ -31,8 +32,25 @@ exports.findByCal = function(req, res) {
       return handleError(res, err);
     }
 
-    User.find(uid, function(err, docs) {
-      return res.json(docs);
+    User.findById(uid, function(err, docs) {
+
+      var timetableArray = [];
+      var timetable = docs.timetable;
+
+      for (var i = 1; i < timetable.length; i++) {
+        if (timetable[i].checked) timetableArray.push(i);
+      }
+
+      underscore.each(groups, function(group) {
+        var date = moment(group.date);
+        var dow = date.day();
+        if (underscore.contains(timetableArray, dow)) {
+          selectedGroups.push(group._id);
+        }
+      });
+
+      return res.json(selectedGroups);
+
     });
 
   });
