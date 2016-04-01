@@ -15,7 +15,7 @@ var UserSchema = new Schema({
   timetable: [{day: String, checked: Boolean}],
   languages: [String],
   age: Number,
-  gender: String,
+  sex: String,
   role: {
     type: String,
     default: 'user'
