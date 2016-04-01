@@ -13,6 +13,9 @@ var UserSchema = new Schema({
   introduction: String,
   zip_code: Number,
   timetable: [{day: String, checked: Boolean}],
+  languages: [String],
+  age: Number,
+  gender: String,
   role: {
     type: String,
     default: 'user'
