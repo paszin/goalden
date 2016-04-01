@@ -5,6 +5,7 @@ angular.module('goaldenAppApp')
         $scope.imgUrl = 'https://pbs.twimg.com/profile_images/651641074373427200/fkGcfovZ.jpg';
     $scope.max_skill_level = 5;
      $scope.positions = ["Goalkeeper", "Defense", "Midfielder", "Forwards", "Left", "Right", "Center"];
+    $scope.languages = ["English", "Japanese", "German"];
     
     $scope.profile = User.get();
     

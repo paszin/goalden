@@ -1,4 +1,6 @@
-<shell title="Groups"><md-button ng-click="save()">save</md-button></shell>
+<shell title="Groups">
+    <md-button ng-click="save()"><i class="fa fa-floppy-o"></i></md-button>
+</shell>
 
 <md-content>
     <div layout="column" layout-margin>
@@ -24,10 +26,21 @@
             </div>
         </section>
 
+        <section>
+            <h4>contact</h4>
+            <p>phone</p>
+            <p>mail</p>
+        </section>
+
 
         <section>
-            <h4>Your Time Preferences</h4>
-            <md-checkbox class="md-primary" layout="column" ng-repeat="day in profile.timetable" ng-model="day.checked">{{day.day | ucfirst}}</md-checkbox>
+            <h4>Availability</h4>
+            <div layout="row" layout-align="center center" layout-wrap>
+                <md-button ng-repeat="day in profile.timetable" class="md-fab md-mini" ng-class="{true: '', false: ''}[day.checked]" aria-label="available {{day}}">
+                    <bold>M</bold>
+                </md-button>
+            </div>
+
         </section>
 
         <section>
@@ -37,10 +50,30 @@
                 <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
             </md-input-container>
 
-            <md-input-container>
-                <label>ZIP Code</label>
-                <input ng-model="profile.zip_code" type="text">
-            </md-input-container>
+            <div layout="row" layout-align="start center" layout-margin>
+                <md-input-container>
+                    <label>Gender</label>
+                    <md-select ng-model="profile.sex">
+                        <md-option ng-value="sex" ng-repeat="sex in ['male', 'female', '-']">{{sex}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div>
+                <md-input-container>
+                    <label>Languages</label>
+                    <md-select ng-model="profile.languages" multiple>
+                        <md-option ng-value="lang" ng-repeat="lang in languages">{{lang}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div>
+                <md-input-container>
+                    <label>ZIP Code</label>
+                    <input ng-model="profile.zip_code" type="text">
+                </md-input-container>
+            </div>
 
         </section>
 
