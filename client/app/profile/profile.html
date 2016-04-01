@@ -1,4 +1,6 @@
-<shell title="Groups"><md-button ng-click="save()">save</md-button></shell>
+<shell title="Groups">
+    <md-button ng-click="save()"><i class="fa fa-floppy-o"></i></md-button>
+</shell>
 
 <md-content>
     <div layout="column" layout-margin>
@@ -9,9 +11,9 @@
 
         <section layout="column">
             <h4>Your Soccer Profile</h4>
-            <div layout="row" layout-margin>
+            <div layout="row" layout-margin class="md-primary">
                 <label>Level</label>
-                <i ng-repeat="s in [] | range: max_skill_level" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
+                <i ng-repeat="s in [] | range: max_skill_level" style="color: orange" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
                 <!--starts from 0 -->
             </div>
             <div layout="row" layout-align="start center" layout-margin>
@@ -24,30 +26,91 @@
             </div>
         </section>
 
-
         <section>
-            <h4>Your Time Preferences</h4>
-            <md-checkbox class="md-primary" layout="column" ng-repeat="day in profile.timetable" ng-model="day.checked">{{day.day | ucfirst}}</md-checkbox>
+            <h4>Contact</h4>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-phone fa-1x"></i>
+                <md-input-container>
+                    <label>Phone</label>
+                    <input ng-model="profile.phone" type="text">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-envelope fa-1x"></i>
+                <md-input-container>
+                    <label>E-Mail</label>
+                    <input ng-model="profile.email" type="text">
+                </md-input-container>
+            </div>
+
         </section>
 
         <section>
             <h4>Personal</h4>
             <md-input-container class="md-block">
                 <label>Introduction</label>
-                <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
             </md-input-container>
 
-            <md-input-container>
-                <label>ZIP Code</label>
-                <input ng-model="profile.zip_code" type="text">
-            </md-input-container>
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-female"></i>
+                <i class="fa fa-male"></i>
+                <md-input-container>
+                    <label>Gender</label>
+                    <md-select ng-model="profile.sex">
+                        <md-option ng-value="sex" ng-repeat="sex in ['male', 'female', '-']">{{sex}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-language"></i>
+                <md-input-container>
+                    <label>Languages</label>
+                    <md-select ng-model="profile.languages" multiple>
+                        <md-option ng-value="lang" ng-repeat="lang in languages">{{lang}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-map-marker"></i>
+                <md-input-container>
+                    <label>ZIP Code</label>
+                    <input name="postalCode" ng-model="profile.zip_code" placeholder="12345" required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                </md-input-container>
+                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                    <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                    <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
+                    </div>
+                </div>
 
         </section>
+
+
+        <section>
+            <h4>Availability</h4>
+            <div layout="row" layout-align="center center" layout-wrap>
+                <md-button md-no-ink ng-repeat="day in profile.timetable" md-theme="altTheme" class="md-fab md-mini md-primary" ng-class="{true: 'md-hue-1', false: 'md-hue-3'}[day.checked]" aria-label="available {{day}}" ng-click="updateDay(day)">
+                    <bold>{{firstLetter(day.day)}}</bold>
+                </md-button>
+            </div>
+
+        </section>
+
+        <section>
+            <h4>Special Needs</h4>
+            <md-input-container>
+                <textarea rows="3"></textarea>
+            </md-input-container>
+        </section>
+
+
 
         <section>
             <h4>Search</h4>
             <p>Looking for similar players.</p>
         </section>
 
-    </div>
+        </div>
 </md-content>

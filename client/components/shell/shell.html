@@ -11,6 +11,7 @@
             </div>
 
         </md-toolbar>
+
         <md-content layout="column" >
             <md-button ng-click="goTo('dashboard')" class="menuButton">
                 <i class="fa fa-heart"></i>Dashboard</md-button>
@@ -28,11 +29,9 @@
             <md-button ng-hide="isLoggedIn()" ui-sref="login" class="menuButton">
                 <i class="fa fa-sign-in"></i>Login</md-button>
             <md-button ng-hide="isLoggedIn()" ui-sref="signup" class="menuButton">
-                <i class="fa fa-sign-in"></i>Signup
-            </md-button>
+                <i class="fa fa-sign-in"></i>Signup</md-button>
             <md-button ng-show="isLoggedIn()" ng-click="logout()" class="menuButton">
-                <i class="fa fa-sign-in"></i>Logout
-            </md-button>
+                <i class="fa fa-sign-in"></i>Logout</md-button>
         </md-content>
     </md-sidenav>
     
