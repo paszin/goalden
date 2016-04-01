@@ -22,8 +22,10 @@ angular.module('goaldenAppApp', [
             .accentPalette("deep-orange");
     }).config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('altTheme')
-            .primaryPalette('blue-grey', {
-                "default": "300"
+            .primaryPalette('light-green', {
+                "default": "300",
+                "hue-3": "50",
+                "hue-1": "900"
             });
     })
     .config(function ($mdIconProvider) {

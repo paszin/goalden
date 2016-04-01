@@ -7,6 +7,14 @@ angular.module('goaldenAppApp')
      $scope.positions = ["Goalkeeper", "Defense", "Midfielder", "Forwards", "Left", "Right", "Center"];
     $scope.languages = ["English", "Japanese", "German"];
     
+    $scope.firstLetter = function(string) {
+        return string[0];
+    };
+    
+    $scope.updateDay = function(day) {
+        day.checked =!day.checked;
+    };
+    
     $scope.profile = User.get();
     
     
