@@ -3,6 +3,10 @@
  * to disable, edit config/environment/index.js, and set `seedDB: false`
  */
 
+// NO NEED TO RUN SEED DATA ANYMORE
+
+
+/*
 'use strict';
 
 var Thing = require('../api/thing/thing.model');
@@ -90,3 +94,5 @@ Group.find({}).remove(function() {
       participants: []
     })
   });
+
+  */
