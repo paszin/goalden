@@ -151,12 +151,13 @@ exports.destroy = function(req, res) {
 exports.listByloc = function(req, res) {
   var userZipCode = 0;
   User.findById(req.params.uid, function(err, user) {
+    console.log(user);
     if (err) return next(err);
     if (!user) return res.status(401).send('Unauthorized');
     userZipCode = user.zip_code;
     console.log('Users zipCode is ' + userZipCode);
     if (userZipCode > 0) {
-      Group.find(function (err, groups) {
+      Group.find(function(err, groups) {
         var selectedGroups = [];
         if (err) {
           return handleError(res, err);
@@ -165,11 +166,12 @@ exports.listByloc = function(req, res) {
           request({
             uri: "http://maps.googleapis.com/maps/api/distancematrix/json",
             method: "GET",
-            key: 'AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q',
-            units: 'imperial',
+            key: "AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q",
+            units: "imperial",
             origins: userZipCode,
             destinations: groups[i].zipCode,
           }, function(error, response, body) {
+            if (error) return handleError(res, err);
             console.log('body from google api call ' + body);
             var distanceTxt = body.rows[0].elements[0].distance.text;
             var distance = parseFloat(distanceTxt.split(" ")[0]);
