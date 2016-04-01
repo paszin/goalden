@@ -1,0 +1,32 @@
+.menuButton{
+	text-align: left;
+}
+
+i{
+	margin-right: 10px;
+}
+
+.weFoundDiv{
+	padding: 6px;
+
+}
+
+img.logo{
+	height: 60px;
+
+}
+
+.menuHeader{
+	background-color: #131B29;
+	color: #FDC70C;
+}
+
+.profileInfo{
+	margin-top: 12px;
+	font-size: 16px;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+	background-color: #131B29;
+	color: #FDC70C;
+}

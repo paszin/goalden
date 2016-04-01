@@ -1,37 +1,44 @@
 <div ng-controller="ShellCtrl" class="main-shell">
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-        <md-toolbar class="md-tall md-accent">
+        <md-toolbar class="md-tall md-accent ">
 
-            <div ng-if="isLoggedIn()" layout="column" layout-padding class="profile-container">
-                <div flex></div>
-                <div layout-padding layout="column">
+            <div ng-if="isLoggedIn()" layout="column" layout-padding class="profile-container menuHeader">
+                <div flex><img class="logo" src="assets/images/goalden_logo_horizontal_gold.png"/></div>
+                <div class="profileInfo" layout-padding layout="column">
                     <div class="profile-name">{{ getCurrentUser().name }}</div>
-                    <div class="profile-email">{{ getCurrentUser().email }}</div>
+                    <!--<div class="profile-email">{{ getCurrentUser().email }}</div>-->
                 </div>
             </div>
 
         </md-toolbar>
-        <md-content layout="column" layout-padding>
-            <md-button ng-click="goTo('dashboard')"><i class="fa fa-globe"></i>Dashboard</md-button>
-            <md-button ng-click="goTo('profile')">Profile</md-button>
-            <md-button ng-click="goTo('groups')">Groups</md-button>
-            <md-button ng-hide="isLoggedIn()" ui-sref="login">
-                <md-icon md-svg-icon="action:input"></md-icon>login</md-button>
-            <md-button ng-hide="isLoggedIn()" ui-sref="signup">
-                <md-icon md-svg-icon="action:launch"></md-icon>
-                Signup
-            </md-button>
-            <md-button ng-show="isLoggedIn()" ng-click="logout()">
-                <md-icon md-svg-icon="action:exit_to_app"></md-icon>
-                Logout
-            </md-button>
+
+        <md-content layout="column" >
+            <md-button ng-click="goTo('dashboard')" class="menuButton">
+                <i class="fa fa-heart"></i>Dashboard</md-button>
+            <md-button ng-click="goTo('profile')" class="menuButton">
+                <i class="fa fa-user"></i>Profile</md-button>
+            <md-button ng-click="goTo('groups')" class="menuButton">
+                <i class="fa fa-child"></i>Games</md-button>
+            <md-button ng-click="goTo('groups')" class="menuButton">
+                <i class="fa fa-calendar"></i>Calendar</md-button>
+            <md-button ng-click="goTo('groups')" class="menuButton">
+                <i class="fa fa-search"></i>Search</md-button>
+            <md-button ng-click="goTo('groups')" class="menuButton">
+                <i class="fa fa-question"></i>Help</md-button>
+                
+            <md-button ng-hide="isLoggedIn()" ui-sref="login" class="menuButton">
+                <i class="fa fa-sign-in"></i>Login</md-button>
+            <md-button ng-hide="isLoggedIn()" ui-sref="signup" class="menuButton">
+                <i class="fa fa-sign-in"></i>Signup</md-button>
+            <md-button ng-show="isLoggedIn()" ng-click="logout()" class="menuButton">
+                <i class="fa fa-sign-in"></i>Logout</md-button>
         </md-content>
     </md-sidenav>
     
     
     <md-toolbar md-scroll-shrink>
         <div class="md-toolbar-tools">
-            <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="Settings">
+            <md-button ng-click="toggleLeft()" aria-label="Settings" class="menuButton">
                 <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
             </md-button>
             <h2><span>Goalden {{title}}</span></h2>
