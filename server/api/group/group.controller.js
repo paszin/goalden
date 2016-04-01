@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var underscore = require('underscore');
 var Group = require('./group.model');
 
 // Get a list of groups a given user is registered for
@@ -9,7 +10,7 @@ exports.index = function(req, res) {
     var selectedGroups = [];
     if(err) { return handleError(res, err); }
     for (var i = 0 ; i < groups.length; i ++) {
-      if (groups[i].participants.indexOf(req.params.uid) >= 0) {
+      if (underscore.contains(groups[i].participants, req.params.uid)) {
         selectedGroups.push(groups[i]);
       } 
     }
@@ -36,6 +37,22 @@ exports.create = function(req, res) {
 
 // Updates an existing group in the DB.
 exports.update = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  Group.findById(req.params.id, function (err, group) {
+    if (err) { return handleError(res, err); }
+    if(!group) { return res.status(404).send('Not Found'); }
+    var updated = _.merge(group, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(group);
+    });
+  });
+};
+
+// add this user to the group
+exports.addUser = function(req, res) {
+  // req.params.gid
+  // req.params.uid
   if(req.body._id) { delete req.body._id; }
   Group.findById(req.params.id, function (err, group) {
     if (err) { return handleError(res, err); }
