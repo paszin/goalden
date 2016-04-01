@@ -1,4 +1,6 @@
-<shell title="Groups"><md-button ng-click="save()">save</md-button></shell>
+<shell title="Groups">
+    <md-button ng-click="save()"><i class="fa fa-floppy-o"></i></md-button>
+</shell>
 
 <md-content>
     <div layout="column" layout-margin>
@@ -37,10 +39,30 @@
                 <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
             </md-input-container>
 
-            <md-input-container>
-                <label>ZIP Code</label>
-                <input ng-model="profile.zip_code" type="text">
-            </md-input-container>
+            <div layout="row" layout-align="start center" layout-margin>
+                <label>Sex</label>
+                <md-input-container>
+                    <md-select ng-model="profile.sex">
+                        <md-option ng-value="sex" ng-repeat="sex in ['male', 'female', '-']">{{sex}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div>
+                <label>Languages</label>
+                <md-input-container>
+                    <md-select ng-model="profile.languages" multiple>
+                        <md-option ng-value="lang" ng-repeat="lang in languages">{{lang}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div>
+                <md-input-container>
+                    <label>ZIP Code</label>
+                    <input ng-model="profile.zip_code" type="text">
+                </md-input-container>
+            </div>
 
         </section>
 
