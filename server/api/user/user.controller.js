@@ -54,6 +54,19 @@ exports.show = function(req, res, next) {
 };
 
 /**
+ * Get all games this user is registered for
+ */
+exports.games = function(req, res, next) {
+  var userId = req.params.id;
+
+  User.findById(userId, function(err, user) {
+    if (err) return next(err);
+    if (!user) return res.status(401).send('Unauthorized');
+    res.json(user.profile);
+  });
+};
+
+/**
  * Deletes a user
  * restriction: 'admin'
  */

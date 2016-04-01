@@ -3,11 +3,17 @@
 var _ = require('lodash');
 var Group = require('./group.model');
 
-// Get list of groups
+// Get a list of groups a given user is registered for
 exports.index = function(req, res) {
   Group.find(function (err, groups) {
+    var selectedGroups = [];
     if(err) { return handleError(res, err); }
-    return res.status(200).json(groups);
+    for (var i = 0 ; i < groups.length; i ++) {
+      if (groups[i].participants.indexOf(req.params.uid) >= 0) {
+        selectedGroups.push(groups[i]);
+      } 
+    }
+    return res.status(200).json(selectedGroups);
   });
 };
 
