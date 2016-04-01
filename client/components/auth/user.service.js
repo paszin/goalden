@@ -17,6 +17,12 @@ angular.module('goaldenAppApp')
         params: {
           id:'me'
         }
-      }
+      },
+        put: {
+            method: 'PUT',
+            params: {
+                id: 'me'
+            }
+        }
 	  });
   });

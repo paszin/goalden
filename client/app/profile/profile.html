@@ -17,7 +17,7 @@
             <div layout="row" layout-align="start center" layout-margin>
                 <label>Position</label>
                 <md-input-container flex>
-                    <md-select ng-model="profile.position" multiple>
+                    <md-select ng-model="profile.positions" multiple>
                         <md-option ng-value="pos" ng-repeat="pos in positions">{{pos}}</md-option>
                     </md-select>
                 </md-input-container>
@@ -27,7 +27,7 @@
 
         <section>
             <h4>Your Time Preferences</h4>
-            <md-checkbox class="md-primary" layout="column" ng-repeat="(day, ok) in profile.timetable" ng-model="ok">{{day | ucfirst}}</md-checkbox>
+            <md-checkbox class="md-primary" layout="column" ng-repeat="day in profile.timetable" ng-model="day.checked">{{day.day | ucfirst}}</md-checkbox>
         </section>
 
         <section>
@@ -50,6 +50,6 @@
         </section>
 
     </div>
-    <md-button>save changes</md-button>
+    <md-button ng-click="save()">save changes</md-button>
     <md-button>reset</md-button>
 </md-content>
