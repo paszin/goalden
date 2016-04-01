@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/users/:uid/groups', controller.index);
 router.get('/:id', controller.show);
 router.get('/groups/:id/participants', controller.showParticipants);
+router.get('/users/:uid/groups/location', controller.listByloc);
 router.get('/users/:uid/groups/:gid/add', controller.addUser);
 router.get('/users/:uid/cal', controller.findByCal);
 router.post('/', controller.create);
