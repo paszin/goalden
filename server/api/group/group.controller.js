@@ -148,14 +148,13 @@ exports.destroy = function(req, res) {
 };
 
 // Get a list of groups within specific distance from location
-exports.listByloc = function(req, res) {
+exports.listByloc = function(req, res) { ///groups/users/:uid/location
   var userZipCode = 0;
   User.findById(req.params.uid, function(err, user) {
-    console.log(user);
     if (err) return next(err);
     if (!user) return res.status(401).send('Unauthorized');
     userZipCode = user.zip_code;
-    console.log('Users zipCode is ' + userZipCode);
+    //console.log('Users zipCode is ' + userZipCode);
     if (userZipCode > 0) {
       Group.find(function(err, groups) {
         var selectedGroups = [];
@@ -163,19 +162,18 @@ exports.listByloc = function(req, res) {
           return handleError(res, err);
         }
         for (var i = 0; i < groups.length; i++) {
+          //console.log('groups zipcode = ' + groups[i].zipCode);
           request({
-            uri: "http://maps.googleapis.com/maps/api/distancematrix/json",
-            method: "GET",
-            key: "AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q",
-            units: "imperial",
-            origins: userZipCode,
-            destinations: groups[i].zipCode,
+            uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + groups[i].zipCode,
           }, function(error, response, body) {
             if (error) return handleError(res, err);
-            console.log('body from google api call ' + body);
+            //console.log(body);
+            body = JSON.parse(body);
             var distanceTxt = body.rows[0].elements[0].distance.text;
             var distance = parseFloat(distanceTxt.split(" ")[0]);
-            if (distance < 30) {
+            console.log('(distance < 50) is ' + (distance < 50));
+            if (distance < 50) {
+              console.log(distance);
               selectedGroups.push(groups[i]);
             }
           });
