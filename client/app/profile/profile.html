@@ -1,40 +1,55 @@
 <div ng-include="'components/shell/shell.html'"></div>
 
-
-<div>
-
-
-    <div layout="row" layout-align="center center" layout-margin>
-        <img width="100px" height="100px" layout-margin ng-src="{{imgUrl}}" class="profile-avatar" />
-        <div>
+<md-content>
+    <div layout="column" layout-margin>
+        <div layout="row" layout-align="center center" layout-margin>
+            <img width="100px" height="100px" layout-margin ng-src="{{imgUrl}}" class="profile-avatar" />
             <h1>Hey {{profile.name}}!</h1>
         </div>
+
+        <section layout="column">
+            <h4>Your Soccer Profile</h4>
+            <div layout="row" layout-margin>
+                <label>Level</label>
+                <i ng-repeat="s in [] | range: max_skill_level" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
+                <!--starts from 0 -->
+            </div>
+            <div layout="row" layout-align="start center" layout-margin>
+                <label>Position</label>
+                <md-input-container flex>
+                    <md-select ng-model="profile.position" multiple>
+                        <md-option ng-value="pos" ng-repeat="pos in positions">{{pos}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </section>
+
+
+        <section>
+            <h4>Your Time Preferences</h4>
+            <md-checkbox class="md-primary" layout="column" ng-repeat="(day, ok) in profile.timetable" ng-model="ok">{{day | ucfirst}}</md-checkbox>
+        </section>
+
+        <section>
+            <h4>Personal</h4>
+            <md-input-container class="md-block">
+                <label>Introduction</label>
+                <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <md-input-container>
+                <label>ZIP Code</label>
+                <input ng-model="profile.zip_code" type="text">
+            </md-input-container>
+
+        </section>
+
+        <section>
+            <h4>Search</h4>
+            <p>Looking for similar players.</p>
+        </section>
+
     </div>
-
-    <section>
-        <h4>Your Skilllevel</h4>
-        <i ng-repeat="s in skillarray" class="fa fa-star"></i>
-        <i ng-repeat="s in skillarray" class="fa fa-star-o"></i>
-    </section>
-
-
-    <section>
-        <h4>Your Timetable</h4>
-        <md-checkbox ng-repeat="(day, ok) in profile.timetable" ng-model="ok">{{day}}</md-checkbox>
-    </section>
-
-    <section>
-        <h4>Personal</h4>
-        <md-input-container class="md-block">
-            <label>Introduction</label>
-            <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-        </md-input-container>
-
-        <md-input-container>
-            <label>ZIP Code</label>
-            <input ng-model="profile.zip_code" type="text">
-        </md-input-container>
-
-    </section>
-
-</div>
+    <md-button>save changes</md-button>
+    <md-button>reset</md-button>
+</md-content>

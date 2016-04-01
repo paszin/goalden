@@ -11,17 +11,19 @@
       </div>
       
     </md-toolbar>
-    <md-content layout-padding>
-
+    <md-content layout="column" layout-padding>
+        <md-button ng-click="goTo('dashboard')">Dashboard</md-button>
+        <md-button ng-click="goTo('profile')">Profile</md-button>
+        <md-button ng-click="goTo('groups')">Groups</md-button>
     </md-content>
   </md-sidenav>
-  <md-toolbar>
+  <md-toolbar md-scroll-shrink>
     <div class="md-toolbar-tools">
       <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="Settings">
         <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
       </md-button>
       <h2>
-          <span>goalden-app</span>
+          <span>Goalden</span>
         </h2>
       <span flex=""></span>
       <md-menu>

@@ -16,7 +16,8 @@ angular.module('goaldenAppApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/profile');
+        $location.search('new', 1);
         })
         .catch( function(err) {
           err = err.data;

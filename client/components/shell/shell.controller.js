@@ -20,11 +20,16 @@ angular.module('goaldenAppApp')
     $scope.toggleLeft = function() {
       $mdSidenav('left').toggle();
     };
+    
 
     var originatorEv;
     $scope.openMenu = function($mdOpenMenu, ev) {
       originatorEv = ev;
       $mdOpenMenu(ev);
+    };
+    
+    $scope.goTo = function(page) {
+        $location.path('/' + page);  
     };
 
     $scope.notificationsEnabled = true;

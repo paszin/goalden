@@ -8,7 +8,8 @@ angular.module('goaldenAppApp', [
   'ngMessages',
   'btford.socket-io',
   'ui.router',
-  'ngMaterial'
+  'ngMaterial',
+  'angular.filter'
 ])
   .config(function($mdIconProvider) {
     $mdIconProvider

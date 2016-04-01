@@ -2,5 +2,5 @@
 
 angular.module('goaldenAppApp')
   .controller('GroupsCtrl', function ($scope) {
-    $scope.message = 'Hello';
+    $scope.aNumber = Math.round(Math.random()*8);
   });
