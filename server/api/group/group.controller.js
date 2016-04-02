@@ -58,6 +58,7 @@ exports.findByCal = function(req, res) {
 
       var timetableArray = [];
       var timetable = docs.timetable;
+      var userZipCode = docs.zip_code;
 
       for (var i = 1; i < timetable.length; i++) {
         if (timetable[i].checked) timetableArray.push(i);
@@ -67,9 +68,37 @@ exports.findByCal = function(req, res) {
         var date = moment(group.date);
         var dow = date.day();
         if (underscore.contains(timetableArray, dow)) {
-          selectedGroups.push(group._id);
+          selectedGroups.push(group);
         }
       });
+
+      async.each(selectedGroups, function(group, callback) {
+
+        request({
+          uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + group.zipCode,
+        }, function(error, response, body) {
+          if (error) return handleError(res, err);
+          body = JSON.parse(body);
+          var distanceTxt = body.rows[0].elements[0].distance.text;
+          var distance = parseFloat(distanceTxt.split(" ")[0]);
+          if (distance < 50) {
+            closeGroups.push(group);
+          }
+          callback();
+        });
+      }, function(err) {
+        // if any of the file processing produced an error, err would equal that error
+        if (err) {
+          // One of the iterations produced an error.
+          // All processing will now stop.
+          console.log('A file failed to process');
+        } else {
+          return res.status(200).json(closeGroups);
+          console.log('All files have been processed successfully');
+        }
+      });
+
+
 
       return res.json(selectedGroups);
 
