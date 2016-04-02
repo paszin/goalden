@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var GameSchema = new Schema({
   name: String,
   info: String,
-  participants: [{name: String, objectid: Schema.Types.ObjectId}],
+  players: [{name: String, id: Number}],
+  mentors: [{name: String, id: Number}],
   date: Date,
   location: String
 });

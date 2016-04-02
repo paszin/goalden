@@ -6,9 +6,9 @@ var controller = require('./group.controller');
 var router = express.Router();
 
 router.get('/users/:uid/groups', controller.index);
-//router.get('/users/:uid/groups/candidates', controller.); // to do 
+//router.get('/users/:uid/groups/candidates', controller.); // to do
 router.get('/users/:uid/groups/past', controller.getPast);
-router.get('/:id', controller.show);  
+router.get('/:id', controller.show);
 router.get('/groups/:id/participants', controller.showParticipants);
 router.get('/groups/users/:uid/location', controller.listByloc);
 router.get('/users/:uid/groups/:gid/add', controller.addUser);

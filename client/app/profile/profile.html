@@ -1,5 +1,5 @@
 <shell title="Groups">
-    
+    <md-button class="md-fab md-primary menuHeader md-mini" ng-click="save()"><i class="fa fa-floppy-o"></i></md-button>
 </shell>
 
 <md-content>
@@ -49,7 +49,7 @@
             <h4>Personal</h4>
             <md-input-container class="md-block">
                 <label>Introduction</label>
-                <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
+                <textarea ng-model="profile.introduction" md-maxlength="150" rows="4" md-select-on-focus placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
             </md-input-container>
 
             <div layout="row" layout-align="start start" layout-margin>
@@ -114,7 +114,7 @@
         <md-card>
             <h4>Special Needs</h4>
             <md-input-container>
-                <textarea rows="3"></textarea>
+                <textarea rows="3" placeholder="only for mentor visible"></textarea>
             </md-input-container>
         </md-card>
 

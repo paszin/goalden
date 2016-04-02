@@ -8,7 +8,7 @@
 
 'use strict';
 
-var Thing = require('../api/thing/thing.model');
+var Game = require('../api/game/game.model');
 var User = require('../api/user/user.model');
 var Group = require('../api/group/group.model');
 
@@ -21,6 +21,7 @@ User.find({}).remove(function() {
       password: 'admin1'
     }, {
       provider: 'local',
+      id: 1,
       name: 'Genki',
       email: 'genki@test.com',
       sex: "female",
@@ -106,4 +107,14 @@ Group.find({}).remove(function() {
       participants: []
     })
   });
+
+Game.find({}).remove(function() {
+  Game.create({
+    name: "Beginners Game",
+    date: Date.now() - (24*60*60*1000),
+    location: "Bol Park",
+    players: [{name: "Genki", id: 1}],
+    mentors: [{name: "Momo", id: 2}]
+  })
+});
 

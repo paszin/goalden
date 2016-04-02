@@ -7,7 +7,7 @@ var Game = require('./game.model');
 exports.index = function(req, res) {
   Game.find(function (err, games) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(games);
+    return res.status(200).json({games: games});
   });
 };
 
