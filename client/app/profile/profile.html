@@ -49,7 +49,7 @@
             <h4>Personal</h4>
             <md-input-container class="md-block">
                 <label>Introduction</label>
-                <textarea ng-model="profile.introduction" md-maxlength="150" rows="4" md-select-on-focus placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
+                <textarea ng-model="profile.introduction" md-maxlength="150" rows="4" placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
             </md-input-container>
 
             <div layout="row" layout-align="start start" layout-margin>
@@ -65,12 +65,16 @@
 
             <div layout="row" layout-align="start start" layout-margin>
                 <i class="fa fa-language"></i>
-                <md-input-container>
-                    <label>Languages</label>
-                    <md-select ng-model="profile.languages" multiple>
-                        <md-option ng-value="lang" ng-repeat="lang in languages">{{lang}}</md-option>
-                    </md-select>
-                </md-input-container>
+                <md-chips ng-model="profile.languages" md-autocomplete-snap md-require-match="false">
+                    <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="searchText" md-items="item in ['English', 'German']" md-item-text="item" placeholder="languages you speak">
+                        <span md-highlight-text="vm.searchText">{{item}}</span>
+                    </md-autocomplete>
+                    <md-chip-template>
+                        <span>
+		        	{{$chip}}
+		        </span>
+                    </md-chip-template>
+                </md-chips>
             </div>
 
             <div layout="row" layout-align="start start" layout-margin>
@@ -99,22 +103,6 @@
 
         </md-card>
 
-        <md-cards>
-            <h4>Languages</h4>
-            <div layout="row" layout-align="start start" layout-margin>
-                <i class="fa fa-language"></i>
-                <md-chips ng-model="profile.languages" md-autocomplete-snap md-require-match="false">
-                    <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="searchText" md-items="item in ['English', 'German']" md-item-text="item" placeholder="languages you speak">
-                        <span md-highlight-text="vm.searchText">{{item}}</span>
-                    </md-autocomplete>
-                    <md-chip-template>
-                        <span>
-		        	{{$chip}}
-		        </span>
-                    </md-chip-template>
-                </md-chips>
-            </div>
-        </md-cards>
 
         <md-card>
             <h4>Special Needs</h4>

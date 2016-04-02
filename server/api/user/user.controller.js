@@ -107,7 +107,8 @@ exports.updateUser = function(req, res, next) {
     user.zip_code = req.body.zip_code,
     user.timetable = req.body.timetable,
     user.languages = req.body.languages,
-    user.sex = req.body.sex
+    user.age = req.body.age,
+    user.sex = req.body.sex;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.status(200).send('OK');

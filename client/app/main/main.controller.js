@@ -13,9 +13,12 @@ angular.module('goaldenAppApp')
         $scope.games = resp.data.games;
     });
     
+    
+    
     $scope.joinGame = function(game) {
         game.joined = !game.joined;
-        //$http.post("/api/game/" + game.id + "/join")
+        game.players.push($scope.user);
+        $http.post("/api/games/" + game._id + "/users/" + $scope.user._id + "/join");
     }
     
   });
