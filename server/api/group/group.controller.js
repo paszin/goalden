@@ -5,6 +5,8 @@ var underscore = require('underscore');
 var Group = require('./group.model');
 var User = require('../user/user.model');
 var request = require("request");
+var moment = require("moment");
+var Bucks = require("bucks");
 
 // Get a list of groups a given user is registered for
 exports.index = function(req, res) {
@@ -22,6 +24,27 @@ exports.index = function(req, res) {
   });
 };
 
+// Get a list of groups a user attended in the last 7 days
+exports.getPast = function(req, res) {
+  var uid = req.params.uid;
+  Group.find(function(err, groups) {
+    var selectedGroups = [];
+    if (err) {
+      return handleError(res, err);
+    }
+    for (var i = 0; i < groups.length; i++) {
+
+      var now = moment();
+      var target = moment(groups[i].date);
+
+      if (underscore.contains(groups[i].participants, req.params.uid) && 1 <= now.diff(target, 'days') && now.diff(target, 'days') <= 7) {
+        selectedGroups.push(groups[i]);
+      }
+    }
+    return res.status(200).json(selectedGroups);
+  });
+};
+
 // get a list of groups happening on the days a user checked
 exports.findByCal = function(req, res) {
   var uid = req.params.uid;
@@ -31,8 +54,25 @@ exports.findByCal = function(req, res) {
       return handleError(res, err);
     }
 
-    User.find(uid, function(err, docs) {
-      return res.json(docs);
+    User.findById(uid, function(err, docs) {
+
+      var timetableArray = [];
+      var timetable = docs.timetable;
+
+      for (var i = 1; i < timetable.length; i++) {
+        if (timetable[i].checked) timetableArray.push(i);
+      }
+
+      underscore.each(groups, function(group) {
+        var date = moment(group.date);
+        var dow = date.day();
+        if (underscore.contains(timetableArray, dow)) {
+          selectedGroups.push(group._id);
+        }
+      });
+
+      return res.json(selectedGroups);
+
     });
 
   });
@@ -148,39 +188,71 @@ exports.destroy = function(req, res) {
 };
 
 // Get a list of groups within specific distance from location
-exports.listByloc = function(req, res) {
+exports.listByloc = function(req, res) { ///groups/users/:uid/location
   var userZipCode = 0;
+  var test = [];
+  var test2 = [];
   User.findById(req.params.uid, function(err, user) {
-    console.log(user);
     if (err) return next(err);
     if (!user) return res.status(401).send('Unauthorized');
     userZipCode = user.zip_code;
-    console.log('Users zipCode is ' + userZipCode);
+    //console.log('Users zipCode is ' + userZipCode);
     if (userZipCode > 0) {
       Group.find(function(err, groups) {
         var selectedGroups = [];
         if (err) {
           return handleError(res, err);
         }
-        for (var i = 0; i < groups.length; i++) {
-          request({
-            uri: "http://maps.googleapis.com/maps/api/distancematrix/json",
-            method: "GET",
-            key: "AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q",
-            units: "imperial",
-            origins: userZipCode,
-            destinations: groups[i].zipCode,
-          }, function(error, response, body) {
-            if (error) return handleError(res, err);
-            console.log('body from google api call ' + body);
-            var distanceTxt = body.rows[0].elements[0].distance.text;
-            var distance = parseFloat(distanceTxt.split(" ")[0]);
-            if (distance < 30) {
-              selectedGroups.push(groups[i]);
-            }
+
+        // for (var i = 0; i < 5; i++) {
+        //   test.push(function func(err, res, next) {
+        //     return next(null, 5);
+        //   });
+        // }
+
+        for (var j = 0; j < groups.length; j++) {
+          test2.push(function func(err, res, next) {
+            request({
+              uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + groups[j].zipCode,
+            }, function(error, response, body) {
+              if (error) return handleError(res, err);
+              console.log(body);
+              body = JSON.parse(body);
+              var distanceTxt = body.rows[0].elements[0].distance.text;
+              var distance = parseFloat(distanceTxt.split(" ")[0]);
+              console.log('(distance < 50) is ' + (distance < 50));
+              if (distance < 50) {
+                return groups[i];
+              }
+            });
           });
         }
-        return res.status(200).json(selectedGroups);
+
+        return (new Bucks()).parallel(test2).add(function getResults(err, response, next) {
+          console.log(response);
+        }).end();
+
+
+
+
+        // for (var i = 0; i < groups.length; i++) {
+        //   //console.log('groups zipcode = ' + groups[i].zipCode);
+        //   request({
+        //     uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + groups[i].zipCode,
+        //   }, function(error, response, body) {
+        //     if (error) return handleError(res, err);
+        //     console.log(body);
+        //     body = JSON.parse(body);
+        //     var distanceTxt = body.rows[0].elements[0].distance.text;
+        //     var distance = parseFloat(distanceTxt.split(" ")[0]);
+        //     console.log('(distance < 50) is ' + (distance < 50));
+        //     if (distance < 50) {
+        //       console.log(distance);
+        //       selectedGroups.push(groups[i]);
+        //     }
+        //   });
+        // }
+        // return res.status(200).json(selectedGroups);
       });
     }
   });
