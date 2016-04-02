@@ -15,6 +15,15 @@ img.logo-small{
 	color: #FDC70C !important;
 }
 
+.menu-toolbar {
+    position: fixed;
+    top: 0;
+}
+
+md-content {
+    margin-top: 60px;
+}
+
 
 
 /*

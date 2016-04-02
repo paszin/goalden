@@ -98,16 +98,21 @@
             </div>
 
         </md-card>
-        
+
         <md-cards>
-        <div layout="row" layout-align="start start" layout-margin>
+            <h4>Languages</h4>
+            <div layout="row" layout-align="start start" layout-margin>
                 <i class="fa fa-language"></i>
-                <md-input-container>
-                    <label>Share</label>
-                    <md-select ng-model="profile.offer" multiple>
-                        <md-option ng-value="of" ng-repeat="of in offers">{{of}}</md-option>
-                    </md-select>
-                </md-input-container>
+                <md-chips ng-model="profile.languages" md-autocomplete-snap md-require-match="false">
+                    <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="searchText" md-items="item in ['English', 'German']" md-item-text="item" placeholder="languages you speak">
+                        <span md-highlight-text="vm.searchText">{{item}}</span>
+                    </md-autocomplete>
+                    <md-chip-template>
+                        <span>
+		        	{{$chip}}
+		        </span>
+                    </md-chip-template>
+                </md-chips>
             </div>
         </md-cards>
 
@@ -124,8 +129,8 @@
             <h4>Search</h4>
             <p>Looking for similar players.</p>
         </section>
-            
-            <md-button class="md-raised saveButton" ng-click="save()"><i class="fa fa-floppy-o"></i>Save</md-button>
+
+        <md-button class="md-raised saveButton" ng-click="save()"><i class="fa fa-floppy-o"></i>Save</md-button>
 
     </div>
 </md-content>

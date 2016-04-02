@@ -1,41 +1,50 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-    .controller('ProfileCtrl', function ($scope, $mdToast, User) {
-        $scope.imgUrl = '/assets/images/person.png';
-        $scope.max_skill_level = 5;
-        $scope.positions = ["Goalkeeper", "Defense", "Midfielder", "Forwards", "Left", "Right", "Center"];
-        $scope.languages = ["English", "Japanese", "German"];
-        $scope.offers = ["shoes", "socks", "transportation"];
+    .controller('ProfileCtrl', function ($scope, $mdToast, $mdDialog, User) {
+            $scope.imgUrl = '/assets/images/person_placeholder.png';
+            $scope.max_skill_level = 5;
+            $scope.positions = ["Goalkeeper", "Defense", "Midfielder", "Forwards", "Left", "Right", "Center"];
+            $scope.languages = ["English", "Japanese", "German"];
+            $scope.offers = ["shoes", "socks", "transportation"];
 
 
-        $scope.firstLetter = function (string) {
-            return string[0];
-        };
-
-        $scope.updateDay = function (day) {
-            day.checked = !day.checked;
-        };
-
-        $scope.getStyle = function (day) {
-            return {
-                "background-color": {
-                    true: "light-green",
-                    false: "white"
-                }[day.checked]
+            $scope.firstLetter = function (string) {
+                return string[0];
             };
-        };
 
-        $scope.profile = User.get();
+            $scope.updateDay = function (day) {
+                day.checked = !day.checked;
+            };
+
+            $scope.getStyle = function (day) {
+                return {
+                    "background-color": {
+                        true: "light-green",
+                        false: "white"
+                    }[day.checked]
+                };
+            };
+
+            $scope.profile = User.get();
 
 
-        $scope.save = function () {
-            User.put($scope.profile);
-            $mdToast.show(
-                $mdToast.simple()
-                .textContent('Successfully saved!')
-                .position("top")
-                .hideDelay(3000)
-            );
-        }
-    });
+            $scope.saveDialog = function () {
+                $mdDialog.show({
+                    controller: function ($scope, $mdDialog) {
+                        $scope.cancel = function () {
+                            $mdDialog.cancel();
+                        };
+                    },
+                    clickOutsideToClose: true,
+                    //parent: angular.element('md-content'),
+                    template: '<div layout="column" layout-margin layout-align="center center"><div>Saved</div><md-button ng-click="cancel()">ok</md-button>  </div>'
+                });
+            }
+
+
+                $scope.save = function () {
+                    User.put($scope.profile);
+                    $scope.saveDialog();
+                }
+            });

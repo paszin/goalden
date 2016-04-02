@@ -1,43 +1,57 @@
 <md-dialog aria-label="join a game">
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Upcoming Game</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    x
-                </md-button>
-            </div>
-        </md-toolbar>
-        <md-dialog-content>
-            <div class="md-dialog-content">
-                <h2>{{game.name}}</h2>
-                <div layout="column">
-                        <span><i class="fa fa-user"></i>  Invited Players: 12</span>
-                        <p><i class="fa fa-calendar"></i> Date: {{game.date | beautifyDate}}</p>
-                        <span><i class="fa fa-map-marker"></i>  Location: {{game.location}}</span>
-                    </div>
-                    <br>
-                <p>See who will join</p>
-                <md-list>
-                    <md-subheader class="md-no-sticky">Mentors</md-subheader>
-                    <md-list-item ng-repeat="person in persons">
-                        <p> {{ person.name }} </p>
-                    </md-list-item>
-                    <md-subheader>Attending</md-subheader>
-                    <md-list-item ng-repeat="person in persons">
-                        <p> {{ person.name }} </p>
-                    </md-list-item>
-                </md-list>
-                <md-input-container class="md-block">
-                    <label>leave a comment</label>
-                    <textarea ng-model="comment"></textarea>
-                </md-input-container>
-            </div>
-        </md-dialog-content>
-        <md-dialog-actions layout="row">
-            <md-button ng-click="cancel()" style="margin-right:20px;">
-                close
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Upcoming Game</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                x
             </md-button>
-        </md-dialog-actions>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <h2>{{game.name}}</h2>
+            <div layout="column">
+                <span><i class="fa fa-user"></i>  Invited Players: 12</span>
+                <p><i class="fa fa-calendar"></i> Date: {{game.date | beautifyDate}}</p>
+                <span><i class="fa fa-map-marker"></i>  Location: {{game.location}}</span>
+            </div>
+            <br>
+            <p>See who will join</p>
+            <md-list>
+                <div ng-repeat="role in ['Mentors', 'Players']">
+                    <md-subheader class="md-sticky" style="background-color: white">{{role}}</md-subheader>
+                    <div ng-repeat="person in persons" layout="column">
+                        <md-list-item class="md-2-line secondary-button-padding">
+                            <div layout="row">
+                                <img ng-src="" class="md-avatar" alt="" />
+                                <div class="md-list-item-text">
+                                    <h3>{{ person.name }}</h3>
+                                    <p></p>
+                                    <md-button class="md-secondary" ng-click="person.showMore=!person.showMore"><i class="fa fa-chevron-down"></i>more</md-button>
+                                </div>
+                            </div>
+                        </md-list-item>
+                        <div ng-show="person.showMore">
+                            ...
+                            <md-input-container class="md-block">
+                                <label>Comment</label>
+                                <textarea ng-model="comment"></textarea>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+            </md-list>
+            <md-input-container class="md-block">
+                <label>leave a comment</label>
+                <textarea ng-model="comment"></textarea>
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()" style="margin-right:20px;">
+            close
+        </md-button>
+    </md-dialog-actions>
     </form>
 </md-dialog>
