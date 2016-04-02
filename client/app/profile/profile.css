@@ -2,3 +2,7 @@
 .profile-avatar {
    border-radius: 50%;
 }
+
+.profile-heading {
+    margin-left: 20px;
+}

@@ -10,7 +10,7 @@
         </div>
 
         <md-card layout="column">
-            <h4>Your Soccer Profile</h4>
+            <h4 class="profile-heading">Your Soccer Profile</h4>
             <div layout="row" layout-margin class="md-primary">
                 <label>Skill Level</label>
                 <i ng-repeat="s in [] | range: max_skill_level" style="color: orange" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
@@ -27,7 +27,7 @@
         </md-card>
 
         <md-card flex="none">
-            <h4>Contact</h4>
+            <h4 class="profile-heading">Contact</h4>
             <div layout="row" layout-align="start start" layout-margin>
                 <i class="fa fa-phone fa-1x"></i>
                 <md-input-container>
@@ -46,7 +46,7 @@
         </md-card>
 
         <md-card flex="none">
-            <h4>Personal</h4>
+            <h4 class="profile-heading">Personal</h4>
             <md-input-container class="md-block">
                 <label>Introduction</label>
                 <textarea ng-model="profile.introduction" md-maxlength="150" rows="4" placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
@@ -66,8 +66,8 @@
             <div layout="row" layout-align="start start" layout-margin>
                 <i class="fa fa-language"></i>
                 <md-chips ng-model="profile.languages" md-autocomplete-snap md-require-match="false">
-                    <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="searchText" md-items="item in ['English', 'German']" md-item-text="item" placeholder="languages you speak">
-                        <span md-highlight-text="vm.searchText">{{item}}</span>
+                    <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="searchText" md-items="item in ['English', 'German']" md-item-text="item" placeholder="Languages you speak">
+                        <span>{{item}}</span>
                     </md-autocomplete>
                     <md-chip-template>
                         <span>
@@ -94,7 +94,7 @@
 
 
         <md-card>
-            <h4>Availability</h4>
+            <h4 class="profile-heading">Availability</h4>
             <div layout="row" layout-align="center center" layout-wrap>
                 <md-button md-no-ink ng-repeat="day in profile.timetable" md-theme="altTheme" class="md-fab md-mini md-primary" ng-style="getStyle(day)" aria-label="available {{day}}" ng-click="updateDay(day)">
                     <bold>{{firstLetter(day.day)}}</bold>
@@ -103,22 +103,28 @@
 
         </md-card>
 
-
         <md-card>
-            <h4>Special Needs</h4>
+            <h4 class="profile-heading">Share</h4>
+            <div layout="row" layout-align="start center" layout-margin>
+                <md-input-container flex>
+                    <label>What can you share?</label>
+                    <md-select ng-model="profile.offers" multiple>
+                        <md-option ng-value="of" ng-repeat="of in offers">{{of}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-card>
+
+
+        <md-card ng-if="!profile.is_mentor">
+            <h4 class="profile-heading">Special Needs</h4>
             <md-input-container>
                 <textarea rows="3" placeholder="only for mentor visible"></textarea>
             </md-input-container>
         </md-card>
 
 
-
-        <section>
-            <h4>Search</h4>
-            <p>Looking for similar players.</p>
-        </section>
-
-        <md-button class="md-raised saveButton" ng-click="save()"><i class="fa fa-floppy-o"></i>Save</md-button>
+        <md-button class="md-raised saveButton" ng-click="save()"><i class="fa fa-floppy-o"></i> Save</md-button>
 
     </div>
 </md-content>

@@ -34,6 +34,7 @@ angular.module('goaldenAppApp')
                     controller: function ($scope, $mdDialog) {
                         $scope.cancel = function () {
                             $mdDialog.cancel();
+                            $location.path('/dashboard');
                         };
                     },
                     clickOutsideToClose: true,
