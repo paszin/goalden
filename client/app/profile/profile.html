@@ -98,6 +98,18 @@
             </div>
 
         </md-card>
+        
+        <md-cards>
+        <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-language"></i>
+                <md-input-container>
+                    <label>Share</label>
+                    <md-select ng-model="profile.offer" multiple>
+                        <md-option ng-value="of" ng-repeat="of in offers">{{of}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-cards>
 
         <md-card>
             <h4>Special Needs</h4>

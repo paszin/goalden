@@ -12,31 +12,39 @@
         <div class="md-dialog-content">
             Give others some feedback
             <md-list>
-                <md-subheader class="md-no-sticky">Mentors</md-subheader>
-                <div ng-repeat="person in persons" layout="column">
-                    <md-list-item class="md-2-line secondary-button-padding">
-                        <div layout="row">
-                            <img ng-src="" class="md-avatar" alt="" />
-                            <div class="md-list-item-text">
-                                <h3>{{ person.name }}</h3>
-                                <p></p>
-                                <md-button class="md-secondary" ng-click="person.showFeedback=!person.showFeedback">Feedback</md-button>
+                <div ng-repeat="role in roles">
+                    <md-subheader class="md-sticky" style="background-color: white">{{role}}</md-subheader>
+                    <div ng-repeat="person in persons" layout="column">
+                        <md-list-item class="md-2-line secondary-button-padding">
+                            <div layout="row">
+                                <img ng-src="" class="md-avatar" alt="" />
+                                <div class="md-list-item-text">
+                                    <h3>{{ person.name }}</h3>
+                                    <p></p>
+                                    <md-button class="md-secondary" ng-click="person.showFeedback=!person.showFeedback">Feedback</md-button>
+                                </div>
                             </div>
+                        </md-list-item>
+                        <div ng-show="person.showFeedback">
+                            <div ng-repeat="feedback in feedbackOptions">
+                                <div layout="row" layout-align="start center">
+                                    <span flex="20"></span>
+                                    <span flex> <md-button layout layout-align="center center" class="md-fab md-primary">
+                                    <i class="{{feedback.icon}} fa-2x"></i>
+                                    </md-button>
+                                </span>
+                                    <span flex>{{feedback.info}}</span>
+                                </div>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label>Comment</label>
+                                <textarea ng-model="comment"></textarea>
+                            </md-input-container>
                         </div>
-                    </md-list-item>
-                    <div ng-show="person.showFeedback">
-                        <div ng-repeat="i in [] | range: 4"><md-button class="md-fab"><i class="fa fa-thumbs-up"></i></md-button></div>
                     </div>
                 </div>
-                <md-subheader>Attending</md-subheader>
-                <md-list-item ng-repeat="person in persons">
-                    <p> {{ person.name }} </p>
-                </md-list-item>
             </md-list>
-            <md-input-container class="md-block">
-                <label>Check this out, because ...</label>
-                <textarea ng-model="comment"></textarea>
-            </md-input-container>
+
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">

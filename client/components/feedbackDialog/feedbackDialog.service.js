@@ -2,31 +2,51 @@
 
 
 
-function DialogController($scope, $mdDialog, track_id) {
+function DialogControllerFeedback($scope, $mdDialog, track_id) {
     $scope.track_id = track_id;
-    $scope.persons = [{name: "Mike Meiker"}, {name: "Thomas Muller"}, {name: "Michael Ballack"}];
-    
+    $scope.roles = ["Mentors", "Players"];
+    $scope.persons = [{
+        name: "Mike Meiker"
+    }, {
+        name: "Thomas Muller"
+    }, {
+        name: "Michael Ballack",
+        showFeedback: true
+    }];
+    $scope.feedbackOptions = [{
+        icon: "fa fa-thumbs-up",
+        info: "geat job",
+        name: "thumps-up"
+    }, {
+        icon: "fa fa-smile-o",
+        info: "positive attitude",
+        name: "smile"
+    }, {
+        icon: "fa fa-thumbs-up",
+        info: "geat job",
+        name: "thumps-up"
+    }, {
+        icon: "fa fa-thumbs-up",
+        info: "geat job",
+        name: "thumps-up"
+    }];
+
     $scope.hide = function () {
         $mdDialog.hide();
     };
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
-    $scope.answer = function () {
-    };
+    $scope.answer = function () {};
 }
 
-/**
- * @ngdoc service
- * @name core.Services.
- * @description  Service
- */
-function GroupDialog($log, $mdDialog, $mdMedia) {
+//
+function FeedbackDialog($log, $mdDialog, $mdMedia) {
 
     this.show = function (track_id) {
         var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
-            controller: DialogController,
+            controller: DialogControllerFeedback,
             locals: {
                 track_id: track_id
             },
@@ -42,4 +62,4 @@ function GroupDialog($log, $mdDialog, $mdMedia) {
 
 
 angular.module('goaldenAppApp')
-  .service('FeedbackDialog', GroupDialog);
+    .service('FeedbackDialog', FeedbackDialog);

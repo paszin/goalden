@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $location, User, Auth) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {

@@ -10,7 +10,7 @@
     <md-card class="register-card">
         <h4>Use soccer to take our connections to the next level. Are you in?</h4>
         <md-card-content>
-            <h2 class="md-title">Sign up</h2>
+            <h2 class="md-title">Sign up <span ng-show="isMentor">as a Mentor</span></h2>
             <form name="form" ng-submit="register(form)" novalidate>
                 <md-input-container>
                     <label>Name</label>
@@ -35,7 +35,7 @@
                 </md-input-container>
                 <div layout="row">
                     <md-button class="md-primary md-raised" type="submit">Sign up</md-button>
-                    <md-button flex type="submit" href="/login">Login</md-button>
+                    <md-button flex type="submit" href="/login">go to login</md-button>
                 </div>
             </form>
         </md-card-content>

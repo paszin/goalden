@@ -1,9 +1,9 @@
 <shell>
-    <md-button>refresh</md-button>
+    <md-button><i class="fa fa-refresh"></i></md-button>
 </shell>
 <md-content style="background-color: rgb(240, 240, 250);" layout="row" flex>
     <div layout="column">
-        <h1>What's going on</h1>
+        <h4>What's going on</h4>
         <div layout="column" layout-margin>
             <md-card class="md-whiteframe-1dp">
                 <md-toolbar class="md-primary">
@@ -30,7 +30,7 @@
                 <h2>Submit Feedback</h2>
                 <p>You signed up for a meeting yesterday. Please provide some feedback.</p>
                 <div layout="row">
-                    <md-button class="md-primary">give feedback</md-button>
+                    <md-button class="md-primary" ng-click="showFeedbackDialog()">give feedback</md-button>
                 </div>
             </md-card>
 

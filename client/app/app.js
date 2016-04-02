@@ -16,7 +16,7 @@ angular.module('goaldenAppApp', [
         //    color2 = themes[Math.floor(Math.random()*themes.length)];
         //console.log("Your Design: ", color1, "-", color2);
         $mdThemingProvider.theme("default")
-            .primaryPalette("blue", {
+            .primaryPalette("blue-grey", {
                 "hue-3": "A100"
             })
             .accentPalette("deep-orange");

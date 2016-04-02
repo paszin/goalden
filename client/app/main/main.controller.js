@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-  .controller('MainCtrl', function ($scope, $http, $mdMedia, $mdDialog, socket, GroupDialog) {
+  .controller('MainCtrl', function ($scope, $http, $mdMedia, $mdDialog, socket, GroupDialog, FeedbackDialog) {
     $scope.awesomeThings = [];
     
     $scope.showGroupDialog = GroupDialog.show;
+    $scope.showFeedbackDialog = FeedbackDialog.show;
 
 
     /*$http.get('/api/things').success(function(awesomeThings) {

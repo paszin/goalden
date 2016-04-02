@@ -6,6 +6,7 @@ angular.module('goaldenAppApp')
     $scope.max_skill_level = 5;
      $scope.positions = ["Goalkeeper", "Defense", "Midfielder", "Forwards", "Left", "Right", "Center"];
     $scope.languages = ["English", "Japanese", "German"];
+    $scope.offers = ["shoes", "socks", "transportation"];
     
     
     $scope.firstLetter = function(string) {
