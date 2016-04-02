@@ -6,7 +6,6 @@ var Group = require('./group.model');
 var User = require('../user/user.model');
 var request = require("request");
 var moment = require("moment");
-var Bucks = require("bucks");
 
 // Get a list of groups a given user is registered for
 exports.index = function(req, res) {

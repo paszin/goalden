@@ -38,6 +38,8 @@ var UserSchema = new Schema({
   languages: [String],
   age: Number,
   sex: String,
+  feedback: [],
+  games_count: {type: Number, default: 0},
   role: {
     type: String,
     default: 'user'
