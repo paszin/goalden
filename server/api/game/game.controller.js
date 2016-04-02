@@ -69,6 +69,7 @@ exports.showGames = function(req, res) { // api/games/users/:uid
         thisGame["name"] = games[i].name;
         thisGame["date"] = games[i].date;
         thisGame["location"] = games[i].location;
+        thisGame["zipcode"] = games[i].zipcode;
         thisGame["__v"] = games[i].__v;
 
         var date = games[i].date;
@@ -88,6 +89,9 @@ exports.showGames = function(req, res) { // api/games/users/:uid
           for (var j = 0; j < playerIds.length; j++) {
             thisGame.players.push(usersObject[playerIds[j]._id]);
           }
+
+          // estimated_players
+          thisGame.estimated_players = thisGame.zipcode%7 + 8;
 
           upcoming.push(thisGame);
         } else { // the games that happened in the past and he attended.
