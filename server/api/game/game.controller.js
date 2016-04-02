@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var underscore = require('underscore');
 var Game = require('./game.model');
 var User = require('../user/user.model');
 
@@ -29,6 +30,72 @@ exports.show = function(req, res) {
   });
 };
 
+// show all games
+exports.showGames = function(req, res) { // api/games/users/:uid
+
+  Game.find(function(err, games) {
+    if (err) {
+      return handleError(res, err);
+    }
+
+    User.find(function(err2, users) {
+      if (err2) {
+        return handleError(res, err2);
+      }
+
+      // find target user
+      var targetUser = null;
+      targetUser = underscore.find(users, function(user){ return user._id == req.params.uid; });
+      if (targetUser == null) {
+        return res.status(404).send('User Not Found');
+      }
+
+      // users to object
+
+      // var returnGames = {};
+      // var upcoming = [];
+      // var passed = [];
+      // for (var i = 0; i < games.length; i++) {
+
+      //   var date = games[i].date;
+      //   var now = Date.now();
+      //   if (now - date >= 0) { // upcoming
+      //     upcoming.push(games[i]);
+      //   } else { // the games that happened in the past and he attended.
+      //     var thisUserInGame = false;
+      //     var mentors = games[i].mentors;
+
+      //     for (var j = 0 ; j < mentors.length; j ++) {
+      //       if (mentors[j]._id === req.params.uid) 
+      //         thisUserInGame = true;
+      //     }
+
+      //     var players = games[i].players;
+      //     for (var j = 0 ; j < players.length; j ++) {
+      //       if (players[j]._id === req.params.uid)
+      //         thisUserInGame = true;
+      //     }
+
+      //     if (thisUserInGame)
+      //       passed.push(games[i]);
+
+      //   }
+
+      // } // end for
+
+      return res.status(200).json({
+      games: games
+    });
+
+
+    });
+
+
+
+    
+  });
+};
+
 // Creates a new game in the DB.
 exports.create = function(req, res) {
   Game.create(req.body, function(err, game) {
@@ -40,7 +107,7 @@ exports.create = function(req, res) {
 };
 
 // add user to game
-exports.addUser = function(req, res) { // /api/games/:gid/users/:uid/join //to do : mentors duplicate remove
+exports.addUser = function(req, res) { //to do : mentors duplicate remove
   if (req.body._id) {
     delete req.body._id;
   }
@@ -54,7 +121,7 @@ exports.addUser = function(req, res) { // /api/games/:gid/users/:uid/join //to d
 
     User.findById(req.params.uid, function(err2, user) {
       if (err2) {
-        return handleError (res, err2);
+        return handleError(res, err2);
       }
       if (!user) {
         return res.status(404).send('User Not Found');
