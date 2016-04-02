@@ -11,7 +11,7 @@ var UserSchema = new Schema({
   skill_level: {type: Number, default: 1},
   positions: [String],
   introduction: String,
-  zip_code: Number,
+  zip_code: {type: Number, default: 94304},
   timetable: {type: [{day: String, checked: Boolean}], default: [{
         day: "monday",
         checked: false
