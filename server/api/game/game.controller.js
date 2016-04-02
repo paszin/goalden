@@ -57,7 +57,6 @@ exports.showGames = function(req, res) { // api/games/users/:uid
       for (var j = 0; j < users.length; j++) {
         usersObject[users[j]._id] = users[j];
       }
-      console.log(usersObject);
 
       var returnGames = {};
       var upcoming = [];
@@ -90,7 +89,7 @@ exports.showGames = function(req, res) { // api/games/users/:uid
             thisGame.players.push(usersObject[playerIds[j]._id]);
           }
 
-          upcoming.push(thisGame); //gmaes[i]
+          upcoming.push(thisGame);
         } else { // the games that happened in the past and he attended.
           var thisUserInGame = false;
           var mentors = games[i].mentors;
