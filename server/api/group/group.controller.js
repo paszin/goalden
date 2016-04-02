@@ -6,6 +6,7 @@ var Group = require('./group.model');
 var User = require('../user/user.model');
 var request = require("request");
 var moment = require("moment");
+var Bucks = require("bucks");
 
 // Get a list of groups a given user is registered for
 exports.index = function(req, res) {
@@ -16,6 +17,27 @@ exports.index = function(req, res) {
     }
     for (var i = 0; i < groups.length; i++) {
       if (underscore.contains(groups[i].participants, req.params.uid)) {
+        selectedGroups.push(groups[i]);
+      }
+    }
+    return res.status(200).json(selectedGroups);
+  });
+};
+
+// Get a list of groups a user attended in the last 7 days
+exports.getPast = function(req, res) {
+  var uid = req.params.uid;
+  Group.find(function(err, groups) {
+    var selectedGroups = [];
+    if (err) {
+      return handleError(res, err);
+    }
+    for (var i = 0; i < groups.length; i++) {
+
+      var now = moment();
+      var target = moment(groups[i].date);
+
+      if (underscore.contains(groups[i].participants, req.params.uid) && 1 <= now.diff(target, 'days') && now.diff(target, 'days') <= 7) {
         selectedGroups.push(groups[i]);
       }
     }
@@ -168,6 +190,8 @@ exports.destroy = function(req, res) {
 // Get a list of groups within specific distance from location
 exports.listByloc = function(req, res) { ///groups/users/:uid/location
   var userZipCode = 0;
+  var test = [];
+  var test2 = [];
   User.findById(req.params.uid, function(err, user) {
     if (err) return next(err);
     if (!user) return res.status(401).send('Unauthorized');
@@ -179,24 +203,56 @@ exports.listByloc = function(req, res) { ///groups/users/:uid/location
         if (err) {
           return handleError(res, err);
         }
-        for (var i = 0; i < groups.length; i++) {
-          //console.log('groups zipcode = ' + groups[i].zipCode);
-          request({
-            uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + groups[i].zipCode,
-          }, function(error, response, body) {
-            if (error) return handleError(res, err);
-            //console.log(body);
-            body = JSON.parse(body);
-            var distanceTxt = body.rows[0].elements[0].distance.text;
-            var distance = parseFloat(distanceTxt.split(" ")[0]);
-            console.log('(distance < 50) is ' + (distance < 50));
-            if (distance < 50) {
-              console.log(distance);
-              selectedGroups.push(groups[i]);
-            }
+
+        // for (var i = 0; i < 5; i++) {
+        //   test.push(function func(err, res, next) {
+        //     return next(null, 5);
+        //   });
+        // }
+
+        for (var j = 0; j < groups.length; j++) {
+          test2.push(function func(err, res, next) {
+            request({
+              uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + groups[j].zipCode,
+            }, function(error, response, body) {
+              if (error) return handleError(res, err);
+              console.log(body);
+              body = JSON.parse(body);
+              var distanceTxt = body.rows[0].elements[0].distance.text;
+              var distance = parseFloat(distanceTxt.split(" ")[0]);
+              console.log('(distance < 50) is ' + (distance < 50));
+              if (distance < 50) {
+                return groups[i];
+              }
+            });
           });
         }
-        return res.status(200).json(selectedGroups);
+
+        return (new Bucks()).parallel(test2).add(function getResults(err, response, next) {
+          console.log(response);
+        }).end();
+
+
+
+
+        // for (var i = 0; i < groups.length; i++) {
+        //   //console.log('groups zipcode = ' + groups[i].zipCode);
+        //   request({
+        //     uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + groups[i].zipCode,
+        //   }, function(error, response, body) {
+        //     if (error) return handleError(res, err);
+        //     console.log(body);
+        //     body = JSON.parse(body);
+        //     var distanceTxt = body.rows[0].elements[0].distance.text;
+        //     var distance = parseFloat(distanceTxt.split(" ")[0]);
+        //     console.log('(distance < 50) is ' + (distance < 50));
+        //     if (distance < 50) {
+        //       console.log(distance);
+        //       selectedGroups.push(groups[i]);
+        //     }
+        //   });
+        // }
+        // return res.status(200).json(selectedGroups);
       });
     }
   });
