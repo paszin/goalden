@@ -9,14 +9,15 @@ angular.module('goaldenAppApp', [
   'btford.socket-io',
   'ui.router',
   'ngMaterial',
-  'angular.filter'
+  'angular.filter',
+  'angular-chartist'
 ]).config(function ($mdThemingProvider) {
         // random colors
         //var color1 = themes[Math.floor(Math.random()*themes.length)],
         //    color2 = themes[Math.floor(Math.random()*themes.length)];
         //console.log("Your Design: ", color1, "-", color2);
         $mdThemingProvider.theme("default")
-            .primaryPalette("blue", {
+            .primaryPalette("blue-grey", {
                 "hue-3": "A100"
             })
             .accentPalette("deep-orange");

@@ -1,5 +1,5 @@
 <shell title="Groups">
-    <md-button ng-click="save()"><i class="fa fa-floppy-o"></i></md-button>
+    <md-button class="md-fab md-primary menuHeader md-mini" ng-click="save()"><i class="fa fa-floppy-o"></i></md-button>
 </shell>
 
 <md-content>
@@ -9,10 +9,10 @@
             <h1>Hey {{profile.name}}!</h1>
         </div>
 
-        <section layout="column">
+        <md-card layout="column">
             <h4>Your Soccer Profile</h4>
             <div layout="row" layout-margin class="md-primary">
-                <label>Level</label>
+                <label>Skill Level</label>
                 <i ng-repeat="s in [] | range: max_skill_level" style="color: orange" ng-class="{true: 'fa fa-2x fa-star', false: 'fa fa-2x fa-star-o'}[s<profile.skill_level]" ng-click="profile.skill_level=s+1"></i>
                 <!--starts from 0 -->
             </div>
@@ -24,9 +24,9 @@
                     </md-select>
                 </md-input-container>
             </div>
-        </section>
+        </md-card>
 
-        <section>
+        <md-card flex="none">
             <h4>Contact</h4>
             <div layout="row" layout-align="start start" layout-margin>
                 <i class="fa fa-phone fa-1x"></i>
@@ -43,13 +43,13 @@
                 </md-input-container>
             </div>
 
-        </section>
+        </md-card>
 
-        <section>
+        <md-card flex="none">
             <h4>Personal</h4>
             <md-input-container class="md-block">
                 <label>Introduction</label>
-                <textarea ng-model="profile.introduction" md-maxlength="150" rows="5" md-select-on-focus placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
+                <textarea ng-model="profile.introduction" md-maxlength="150" rows="4" md-select-on-focus placeholder="Find out what interests you have in common with other players: English conversation, Developer/coding skills, Academic preparedness, College readiness, Job coach. Do you have any special needs?  Link with Facebook, Google+,etc."></textarea>
             </md-input-container>
 
             <div layout="row" layout-align="start start" layout-margin>
@@ -84,26 +84,39 @@
                     <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
                     </div>
                 </div>
+            </div>
 
-        </section>
+        </md-card>
 
 
-        <section>
+        <md-card>
             <h4>Availability</h4>
             <div layout="row" layout-align="center center" layout-wrap>
-                <md-button md-no-ink ng-repeat="day in profile.timetable" md-theme="altTheme" class="md-fab md-mini md-primary" ng-class="{true: 'md-hue-1', false: 'md-hue-3'}[day.checked]" aria-label="available {{day}}" ng-click="updateDay(day)">
+                <md-button md-no-ink ng-repeat="day in profile.timetable" md-theme="altTheme" class="md-fab md-mini md-primary" ng-style="getStyle(day)" aria-label="available {{day}}" ng-click="updateDay(day)">
                     <bold>{{firstLetter(day.day)}}</bold>
                 </md-button>
             </div>
 
-        </section>
+        </md-card>
+        
+        <md-cards>
+        <div layout="row" layout-align="start start" layout-margin>
+                <i class="fa fa-language"></i>
+                <md-input-container>
+                    <label>Share</label>
+                    <md-select ng-model="profile.offer" multiple>
+                        <md-option ng-value="of" ng-repeat="of in offers">{{of}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-cards>
 
-        <section>
+        <md-card>
             <h4>Special Needs</h4>
             <md-input-container>
-                <textarea rows="3"></textarea>
+                <textarea rows="3" placeholder="only for mentor visible"></textarea>
             </md-input-container>
-        </section>
+        </md-card>
 
 
 
@@ -112,7 +125,7 @@
             <p>Looking for similar players.</p>
         </section>
             
-            <md-button class="md-fab" ng-click="save()"><i class="fa fa-floppy-o"></i></md-button>
+            <md-button class="md-raised saveButton" ng-click="save()"><i class="fa fa-floppy-o"></i>Save</md-button>
 
-        </div>
+    </div>
 </md-content>

@@ -1,52 +1,45 @@
 <shell>
-    <md-button>refresh</md-button>
+    <md-button class="md-fab md-primary menuHeader md-mini"><i class="fa fa-refresh"></i></md-button>
 </shell>
-<md-content style="background-color: rgb(240, 240, 250);" layout="row" flex>
+<md-content md-theme="default" style="background-color: rgb(240, 240, 250);" layout="column" flex>
+    <md-button ng-if="user.is_mentor" ng-click="newGameDialog()">Host New Game</md-button>
     <div layout="column">
-        <h1>What's going on</h1>
         <div layout="column" layout-margin>
-            <md-card class="md-whiteframe-1dp">
-                <md-toolbar class="md-primary">
-                    <div class="md-toolbar-tools">
-                        <p class="md-flex">Upcoming Game</p>
+            <md-card ng-repeat="game in games">
+                <md-subheader ng-show="!game.joined">Upcoming Game</md-subheader>
+                <md-subheader style="background-color: lightgreen" ng-show="game.joined">Upcoming Game</md-subheader>
+                <md-card-title style="cursor: pointer;">
+                    <md-card-title-text class="no-outline">
+                        <span class="md-headline">{{game.name}}</span>
+                        <span class="md-subhead">2 Mentors and 8 Players are going</span>
+                    </md-card-title-text>
+                    <div style="border-radius:  100%; width: 75px; height:75px; background-color: #FDC70C; color: black; font-size:20pt; margin-top: -11px;" layout layout-align="center center"><i class="fa fa-users"></i></div>
+                </md-card-title>
+
+                <md-card-content layout="column" layout-align="space-between">
+                    <div class="md-media-md card-media" layout="column">
+                        <span><i class="fa fa-user"></i>  Invited Players: 12</span>
+                        <p><i class="fa fa-calendar"></i> Date: {{game.date | beautifyDate}}</p>
+                        <span><i class="fa fa-map-marker"></i>  Location: {{game.location}}</span>
                     </div>
-                </md-toolbar>
-                <md-content flex layout-padding>
-
-                    <p>5 People signed up for next Friday in Mountain View.</p>
-                    <div layout="row">
-                        <md-button class="md-primary" ng-click="showGroupDialog()">show more</md-button>
-                    </div>
-            </md-card>
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Upcoming Meetup</h2>
-                <p>Join a group next Friday in Mountain View.</p>
-                <div layout="row">
-                    <md-button class="md-primary">I'm in</md-button>
-                    <md-button class="md-primary">Sorry, no time</md-button>
-                </div>
-            </md-card>
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Submit Feedback</h2>
-                <p>You signed up for a meeting yesterday. Please provide some feedback.</p>
-                <div layout="row">
-                    <md-button class="md-primary">give feedback</md-button>
-                </div>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="showGroupDialog(game)"> <i class="fa fa-forward"></i>Show more</md-button>
+                        <md-button ng-click="joinGame(game)">
+                            <span ng-show="!game.joined"> <i class="fa fa-check"></i>join</span>
+                            <span ng-show="game.joined"><i class="fa fa-cross"></i>leave</span></md-button>
+                    </md-card-actions>
+                </md-card-content>
             </md-card>
 
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Next Match</h2>
-                <p>Thomas just joinedFor your next match on Thursday you will meet Thomas</p>
-                <div layout="row">
-                    <md-button class="md-primary">show more</md-button>
-                </div>
+            <md-card>
+                <md-subheader>Passed Game</md-subheader>
+                <p layout-padding>You joined for a meeting yesterday. Please provide some feedback.</p>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="showFeedbackDialog()"><i class="fa fa-thumbs-up"></i> give feedback</md-button>
+                    </md-card-actions>
             </md-card>
 
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>New Group</h2>
-                <p>We found a new group you can join Mountain View.</p>
-                <md-button class="md-primary">show</md-button>
-            </md-card>
+
         </div>
 
     </div>

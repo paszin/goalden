@@ -6,9 +6,8 @@
 
 
 
-function DialogController($scope, $mdDialog, game) {
-    $scope.game = game;
-    $scope.persons = [{name: "Mike Meiker"}, {name: "Thomas Muller"}, {name: "Michael Ballack"}];
+function DialogControllerNewGame($scope, $mdDialog, track_id) {
+    $scope.track_id = track_id;
     
     $scope.hide = function () {
         $mdDialog.hide();
@@ -25,16 +24,16 @@ function DialogController($scope, $mdDialog, game) {
  * @name core.Services.
  * @description  Service
  */
-function GroupDialog($log, $mdDialog, $mdMedia) {
+function NewGameDialog($log, $mdDialog, $mdMedia) {
 
-    this.show = function (game) {
+    this.show = function (track_id) {
         var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
-            controller: DialogController,
+            controller: DialogControllerNewGame,
             locals: {
-                game: game
+                track_id: track_id
             },
-            templateUrl: "components/groupDialog/groupDialog.html",
+            templateUrl: "components/newGame/newGameDialog.html",
             parent: angular.element(document.body),
             //targetEvent: ev,
             clickOutsideToClose: true,
@@ -46,4 +45,4 @@ function GroupDialog($log, $mdDialog, $mdMedia) {
 
 
 angular.module('goaldenAppApp')
-  .service('GroupDialog', GroupDialog);
+  .service('NewGameDialog', NewGameDialog);

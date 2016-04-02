@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: GroupCtrl', function () {
+describe('Controller: FeedbackCtrl', function () {
 
   // load the controller's module
   beforeEach(module('goaldenAppApp'));
 
-  var GroupCtrl, scope;
+  var FeedbackCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    GroupCtrl = $controller('GroupCtrl', {
+    FeedbackCtrl = $controller('FeedbackCtrl', {
       $scope: scope
     });
   }));

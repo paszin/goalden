@@ -14,6 +14,8 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+      <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -22,7 +24,7 @@
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
-      <link rel="stylesheet" href="app/group/group.css">
+      <link rel="stylesheet" href="app/feedback/feedback.css">
       <link rel="stylesheet" href="app/groups/groups.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/profile/profile.css">
@@ -57,6 +59,7 @@
     <!-- build:js({client,node_modules}) app/vendor.js -->
       <!-- bower:js -->
       <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/json3/lib/json3.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-messages/angular-messages.js"></script>
@@ -68,6 +71,9 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+      <script src="bower_components/chartist/dist/chartist.min.js"></script>
+      <script src="bower_components/angular-chartist.js/dist/angular-chartist.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -83,8 +89,8 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
-          <script src="app/group/group.controller.js"></script>
-          <script src="app/group/group.js"></script>
+          <script src="app/feedback/feedback.controller.js"></script>
+          <script src="app/feedback/feedback.js"></script>
           <script src="app/groups/groups.controller.js"></script>
           <script src="app/groups/groups.js"></script>
           <script src="app/main/main.controller.js"></script>
@@ -93,8 +99,12 @@
           <script src="app/profile/profile.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
+          <script src="components/beautifyDate/beautifyDate.filter.js"></script>
+          <script src="components/feedbackDialog/feedbackDialog.service.js"></script>
+          <script src="components/game/game.service.js"></script>
           <script src="components/groupDialog/groupDialog.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+          <script src="components/newGame/newGame.service.js"></script>
           <script src="components/shell/dialog/dialog.controller.js"></script>
           <script src="components/shell/shell.controller.js"></script>
           <script src="components/shell/shell.directive.js"></script>

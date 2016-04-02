@@ -1,12 +1,24 @@
-.login-card, .register-card {
-  max-width: 300px;
-  margin: 0 auto;
+.login-card,
+.register-card {
+    max-width: 300px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
 }
 
 .love-message {
-  margin-top: 64px;
-  text-align: center;
+    margin-top: 64px;
+    margin-bottom: 10px;
+    text-align: center;
 }
+
+.login-background {
+    background-image: "assets/images/landscape.png";
+    background: linear-gradient(#151515, #CAAA70);
+    height: 100%;
+}
+
+
 /*
 
 .btn-facebook {
