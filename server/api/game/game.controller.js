@@ -55,37 +55,46 @@ exports.showGames = function(req, res) { // api/games/users/:uid
       for ( var j = 0 ; j < users.length ; j ++ ) {
         usersObject[users[j]._id] = users[j];
       }
+      console.log(usersObject);
 
-      // var returnGames = {};
-      // var upcoming = [];
-      // var passed = [];
-      // for (var i = 0; i < games.length; i++) {
+      var returnGames = {};
+      var upcoming = [];
+      var passed = [];
+      for (var i = 0; i < games.length; i++) {
 
-      //   var date = games[i].date;
-      //   var now = Date.now();
-      //   if (now - date >= 0) { // upcoming
-      //     upcoming.push(games[i]);
-      //   } else { // the games that happened in the past and he attended.
-      //     var thisUserInGame = false;
-      //     var mentors = games[i].mentors;
+        var date = games[i].date;
+        var now = Date.now();
+        if (now - date >= 0) { // upcoming
 
-      //     for (var j = 0 ; j < mentors.length; j ++) {
-      //       if (mentors[j]._id === req.params.uid) 
-      //         thisUserInGame = true;
-      //     }
+          // create mentors list
+          var mentorIds = games[i].mentors;
+          games[i].mentors = [];
+          for (var j = 0 ; j < mentorIds.length; j ++) {
+            games[i].mentors.push(usersObject[mentorIds[j]._id]);
+          }
 
-      //     var players = games[i].players;
-      //     for (var j = 0 ; j < players.length; j ++) {
-      //       if (players[j]._id === req.params.uid)
-      //         thisUserInGame = true;
-      //     }
+          upcoming.push(games[i]);
+        } else { // the games that happened in the past and he attended.
+          var thisUserInGame = false;
+          var mentors = games[i].mentors;
 
-      //     if (thisUserInGame)
-      //       passed.push(games[i]);
+          for (var j = 0 ; j < mentors.length; j ++) {
+            if (mentors[j]._id === req.params.uid) 
+              thisUserInGame = true;
+          }
 
-      //   }
+          var players = games[i].players;
+          for (var j = 0 ; j < players.length; j ++) {
+            if (players[j]._id === req.params.uid)
+              thisUserInGame = true;
+          }
 
-      // } // end for
+          if (thisUserInGame)
+            passed.push(games[i]);
+
+        }
+
+      } // end for
 
       return res.status(200).json({
       games: games
