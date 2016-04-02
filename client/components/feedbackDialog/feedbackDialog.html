@@ -1,0 +1,48 @@
+<md-dialog aria-label="join a game">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Passed Game</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                x
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            Give others some feedback
+            <md-list>
+                <md-subheader class="md-no-sticky">Mentors</md-subheader>
+                <div ng-repeat="person in persons" layout="column">
+                    <md-list-item class="md-2-line secondary-button-padding">
+                        <div layout="row">
+                            <img ng-src="" class="md-avatar" alt="" />
+                            <div class="md-list-item-text">
+                                <h3>{{ person.name }}</h3>
+                                <p></p>
+                                <md-button class="md-secondary" ng-click="person.showFeedback=!person.showFeedback">Feedback</md-button>
+                            </div>
+                        </div>
+                    </md-list-item>
+                    <div ng-show="person.showFeedback">
+                        <div ng-repeat="i in [] | range: 4"><md-button class="md-fab"><i class="fa fa-thumbs-up"></i></md-button></div>
+                    </div>
+                </div>
+                <md-subheader>Attending</md-subheader>
+                <md-list-item ng-repeat="person in persons">
+                    <p> {{ person.name }} </p>
+                </md-list-item>
+            </md-list>
+            <md-input-container class="md-block">
+                <label>Check this out, because ...</label>
+                <textarea ng-model="comment"></textarea>
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="answer()" style="margin-right:20px;">
+            Save
+        </md-button>
+    </md-dialog-actions>
+    </form>
+</md-dialog>
