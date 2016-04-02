@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var AutoIncrement = require("mongoose-sequence");
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
@@ -11,6 +12,7 @@ var UserSchema = new Schema({
   skill_level: {type: Number, default: 1},
   positions: [String],
   introduction: String,
+  is_mentor: {type: Boolean, default: false},
   zip_code: Number,
   timetable: {type: [{day: String, checked: Boolean}], default: [{
         day: "monday",
@@ -38,8 +40,9 @@ var UserSchema = new Schema({
   languages: [String],
   age: Number,
   sex: String,
-  feedback: [],
+  feedback: [{name: String, count: Number}],
   games_count: {type: Number, default: 0},
+  feedback_count: {type: Number, default: 0},
   role: {
     type: String,
     default: 'user'
@@ -50,6 +53,11 @@ var UserSchema = new Schema({
   facebook: {},
   google: {},
   github: {}
+});
+
+
+UserSchema.plugin(AutoIncrement, {
+  inc_field: "id"
 });
 
 /**

@@ -9,5 +9,5 @@ module.exports = {
     //uri: 'mongodb://kickappgoalden:kickapp@ds011800.mlab.com:11800/heroku_cvc1kv5t'
   },
 
-  seedDB: false
+  seedDB: true
 };

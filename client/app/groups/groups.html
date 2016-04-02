@@ -2,15 +2,17 @@
     <md-button>refresh</md-button>
 </shell>
 
+Mentor: {{user.is_mentor}}
+
 
 <div class="">
-    <div class="weFoundDiv">We found {{aNumber}} Games, you can join! </div>
+    <div>We found {{aNumber}} Games, you can join! </div>
       
     <md-card ng-repeat="i in [] | range: aNumber" class="cardCss">
         <md-card-title style="cursor: pointer;">
             <md-card-title-text class="no-outline">
                 <span class="md-headline">Game #{{i+1}}</span>
-                <span class="md-subhead">2 Mentors and 8 players are going</span>
+                <span class="md-subhead">2 Mentors and 8 Players are going</span>
             </md-card-title-text>
             <div style="border-radius:  100%; width: 75px; height:75px; background-color: #FFF33B; color: black; font-size:20pt; margin-top: -11px;" layout layout-align="center center">{{(60*aNumber*aNumber*aNumber+3*i)%100 | number : 0}}%</div>
         </md-card-title>

@@ -1,12 +1,12 @@
 <shell>
-    <md-button><i class="fa fa-refresh"></i></md-button>
+    <md-button class="md-fab md-primary menuHeader md-mini"><i class="fa fa-refresh"></i></md-button>
 </shell>
-<md-content style="background-color: rgb(240, 240, 250);" layout="row" flex>
+<md-content md-theme="default" style="background-color: rgb(240, 240, 250);" layout="row" flex>
     <div layout="column">
         <h4>What's going on</h4>
         <div layout="column" layout-margin>
             <md-card class="md-whiteframe-1dp">
-                <md-toolbar class="md-primary">
+                <md-toolbar class="md-primary md-hue-3">
                     <div class="md-toolbar-tools">
                         <p class="md-flex">Upcoming Game</p>
                     </div>
@@ -18,35 +18,16 @@
                         <md-button class="md-primary" ng-click="showGroupDialog()">show more</md-button>
                     </div>
             </md-card>
+            
             <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Upcoming Meetup</h2>
-                <p>Join a group next Friday in Mountain View.</p>
-                <div layout="row">
-                    <md-button class="md-primary">I'm in</md-button>
-                    <md-button class="md-primary">Sorry, no time</md-button>
-                </div>
-            </md-card>
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Submit Feedback</h2>
+                <h2>Rate your last game</h2>
                 <p>You signed up for a meeting yesterday. Please provide some feedback.</p>
                 <div layout="row">
                     <md-button class="md-primary" ng-click="showFeedbackDialog()">give feedback</md-button>
                 </div>
             </md-card>
 
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Next Match</h2>
-                <p>Thomas just joinedFor your next match on Thursday you will meet Thomas</p>
-                <div layout="row">
-                    <md-button class="md-primary">show more</md-button>
-                </div>
-            </md-card>
 
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>New Group</h2>
-                <p>We found a new group you can join Mountain View.</p>
-                <md-button class="md-primary">show</md-button>
-            </md-card>
         </div>
 
     </div>

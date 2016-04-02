@@ -1,6 +1,24 @@
+img.logo{
+	height: 60px;
+}
+
+img.logo-small{
+	height: 50px;
+}
+
 .menuButton{
 	text-align: left;
 }
+
+.menuHeader{
+	background-color: #131B29 !important;
+	color: #FDC70C !important;
+}
+
+
+
+/*
+
 
 i{
 	margin-right: 10px;
@@ -11,22 +29,24 @@ i{
 
 }
 
-img.logo{
-	height: 60px;
 
 }
 
-.menuHeader{
-	background-color: #131B29;
-	color: #FDC70C;
-}
 
 .profileInfo{
 	margin-top: 12px;
 	font-size: 16px;
 }
 
-/*md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
 	background-color: #131B29;
 	color: #FDC70C;
-}*/
+}
+
+
+.md-button.saveButton{
+	width: 100px;
+	background-color: #131B29;
+	color: #FDC70C;
+}
+*/
