@@ -30,3 +30,9 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 	background-color: #131B29;
 	color: #FDC70C;
 }
+
+.md-button.saveButton{
+	width: 100px;
+	background-color: #131B29;
+	color: #FDC70C;
+}
