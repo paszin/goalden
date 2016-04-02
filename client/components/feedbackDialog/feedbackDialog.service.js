@@ -13,23 +13,39 @@ function DialogControllerFeedback($scope, $mdDialog, track_id) {
         name: "Michael Ballack",
         showFeedback: true
     }];
+    $scope.imgUrl = '/assets/images/person_placeholder.png';
     $scope.feedbackOptions = [{
         icon: "fa fa-thumbs-up",
-        info: "geat job",
-        name: "thumps-up"
+        info: "Great Job",
+        name: "thumps_up"
     }, {
         icon: "fa fa-smile-o",
-        info: "positive attitude",
+        info: "Positive Attitude",
         name: "smile"
     }, {
-        icon: "fa fa-thumbs-up",
-        info: "geat job",
-        name: "thumps-up"
+        icon: "fa fa-trophy",
+        info: "Excellent Player",
+        name: "excellent_player"
     }, {
-        icon: "fa fa-thumbs-up",
-        info: "geat job",
-        name: "thumps-up"
+        icon: "fa fa-hand-paper-o",
+        info: "Virtual High Five",
+        name: "high_five"
     }];
+    
+    
+    $scope.updateFeedback = function (person, feedback) {
+                person[feedback.name] = !person[feedback.name];
+            };
+
+            $scope.getStyle = function (person, feedback) {
+                return {
+                    "background-color": {
+                        true: "light-green",
+                        false: "white"
+                    }[!!person[feedback.name]]
+                };
+            };
+
 
     $scope.hide = function () {
         $mdDialog.hide();

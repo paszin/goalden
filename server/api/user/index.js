@@ -14,5 +14,6 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.updateUser);
+router.post('/:uid_from/feedback/:uid_to', auth.isAuthenticated(), controller.submitFeedback);
 
 module.exports = router;

@@ -114,8 +114,20 @@ exports.updateUser = function(req, res, next) {
       res.status(200).send('OK');
     });
   });
-}
+};
 
+exports.submitFeedback = function(req, res, next) {
+  var user_id_from = req.params.uid_from;
+  var user_id_to = req.params.uid_to;
+  var feedback = req.body;
+  User.findById(user_id_to, function(err, user) {
+    user.feedback["excellent_player"] += (feedback["excellent_player"]||0);
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.status(200).send('EPIC');
+    });
+  });
+};
 /**
  * Get my info
  */
