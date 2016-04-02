@@ -50,27 +50,43 @@ exports.findByCal = function(req, res) {
   var uid = req.params.uid;
   Group.find(function(err, groups) {
     var selectedGroups = [];
+    var selectedGroups2 = [];
     if (err) {
       return handleError(res, err);
     }
 
     User.findById(uid, function(err, docs) {
 
+      console.log(docs);
+
+
       var timetableArray = [];
       var timetable = docs.timetable;
       var userZipCode = docs.zip_code;
 
-      for (var i = 1; i < timetable.length; i++) {
-        if (timetable[i].checked) timetableArray.push(i);
+      for (var i = 0; i < timetable.length; i++) {
+        if (timetable[i].checked) {
+          if (i == 6) {
+            i = -1;
+            console.log("i = -1");
+          }
+          timetableArray.push(i+1);
+          console.log((i+1) + " has been pushed");
+        }
       }
+
+      console.log(timetableArray);
 
       underscore.each(groups, function(group) {
         var date = moment(group.date);
         var dow = date.day();
+        console.log(dow);
         if (underscore.contains(timetableArray, dow)) {
           selectedGroups.push(group);
         }
       });
+
+      console.log(selectedGroups);
 
       async.each(selectedGroups, function(group, callback) {
 
@@ -78,11 +94,12 @@ exports.findByCal = function(req, res) {
           uri: "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCck014vdNXDceMjZh44Dnx63QXbEc_s1Q&units=imperial&origins=" + userZipCode + "&destinations=" + group.zipCode,
         }, function(error, response, body) {
           if (error) return handleError(res, err);
+          console.log(body);
           body = JSON.parse(body);
           var distanceTxt = body.rows[0].elements[0].distance.text;
           var distance = parseFloat(distanceTxt.split(" ")[0]);
           if (distance < 50) {
-            closeGroups.push(group);
+            selectedGroups2.push(group);
           }
           callback();
         });
@@ -93,14 +110,10 @@ exports.findByCal = function(req, res) {
           // All processing will now stop.
           console.log('A file failed to process');
         } else {
-          return res.status(200).json(closeGroups);
+          return res.status(200).json(selectedGroups2);
           console.log('All files have been processed successfully');
         }
       });
-
-
-
-      return res.json(selectedGroups);
 
     });
 
