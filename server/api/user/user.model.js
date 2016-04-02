@@ -12,7 +12,29 @@ var UserSchema = new Schema({
   positions: [String],
   introduction: String,
   zip_code: Number,
-  timetable: [{day: String, checked: Boolean}],
+  timetable: {type: [{day: String, checked: Boolean}], default: [{
+        day: "monday",
+        checked: false
+      }, {
+        day: "tuesday",
+        checked: false
+      }, {
+        day: "wednesday",
+        checked: false
+      }, {
+        day: "thursday",
+        checked: false
+      }, {
+        day: "friday",
+        checked: false
+      }, {
+        day: "saturday",
+        checked: false
+      }, {
+        day: "sunday",
+        checked: false
+      }]
+    },
   languages: [String],
   age: Number,
   sex: String,

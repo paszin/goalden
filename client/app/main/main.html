@@ -1,17 +1,25 @@
-<shell><md-button>refresh</md-button></shell>
+<shell>
+    <md-button>refresh</md-button>
+</shell>
 <md-content style="background-color: rgb(240, 240, 250);" layout="row" flex>
     <div layout="column">
         <h1>What's going on</h1>
         <div layout="column" layout-margin>
-            <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Upcomming Meetup</h2>
-                <p>5 People signed up for next Friday in Mountain View.</p>
-                <div layout="row">
-                    <md-button class="md-primary">show more</md-button>
-                </div>
+            <md-card class="md-whiteframe-1dp">
+                <md-toolbar class="md-primary">
+                    <div class="md-toolbar-tools">
+                        <p class="md-flex">Upcoming Game</p>
+                    </div>
+                </md-toolbar>
+                <md-content flex layout-padding>
+
+                    <p>5 People signed up for next Friday in Mountain View.</p>
+                    <div layout="row">
+                        <md-button class="md-primary" ng-click="showGroupDialog()">show more</md-button>
+                    </div>
             </md-card>
             <md-card layout-margin class="md-whiteframe-1dp">
-                <h2>Upcomming Meetup</h2>
+                <h2>Upcoming Meetup</h2>
                 <p>Join a group next Friday in Mountain View.</p>
                 <div layout="row">
                     <md-button class="md-primary">I'm in</md-button>
@@ -42,4 +50,4 @@
         </div>
 
     </div>
-</md-content>
+    </md-content>

@@ -1,0 +1,36 @@
+<md-dialog aria-label="join a game">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Upcoming Game</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    x
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                See who will join
+                <md-list>
+                    <md-subheader class="md-no-sticky">Mentors</md-subheader>
+                    <md-list-item ng-repeat="person in persons">
+                        <p> {{ person.name }} </p>
+                    </md-list-item>
+                    <md-subheader>Attending</md-subheader>
+                    <md-list-item ng-repeat="person in persons">
+                        <p> {{ person.name }} </p>
+                    </md-list-item>
+                </md-list>
+                <md-input-container class="md-block">
+                    <label>Check this out, because ...</label>
+                    <textarea ng-model="comment"></textarea>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="answer()" style="margin-right:20px;">
+                Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

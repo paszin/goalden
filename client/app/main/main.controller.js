@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, $mdMedia, $mdDialog, socket, GroupDialog) {
     $scope.awesomeThings = [];
+    
+    $scope.showGroupDialog = GroupDialog.show;
 
-    $http.get('/api/things').success(function(awesomeThings) {
+
+    /*$http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
@@ -45,4 +48,5 @@ angular.module('goaldenAppApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+    */
   });
