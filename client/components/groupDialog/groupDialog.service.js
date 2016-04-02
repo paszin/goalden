@@ -6,8 +6,8 @@
 
 
 
-function DialogController($scope, $mdDialog, track_id) {
-    $scope.track_id = track_id;
+function DialogController($scope, $mdDialog, game) {
+    $scope.game = game;
     $scope.persons = [{name: "Mike Meiker"}, {name: "Thomas Muller"}, {name: "Michael Ballack"}];
     
     $scope.hide = function () {
@@ -27,12 +27,12 @@ function DialogController($scope, $mdDialog, track_id) {
  */
 function GroupDialog($log, $mdDialog, $mdMedia) {
 
-    this.show = function (track_id) {
+    this.show = function (game) {
         var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
             controller: DialogController,
             locals: {
-                track_id: track_id
+                game: game
             },
             templateUrl: "components/groupDialog/groupDialog.html",
             parent: angular.element(document.body),

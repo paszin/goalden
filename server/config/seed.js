@@ -111,7 +111,13 @@ Group.find({}).remove(function() {
 Game.find({}).remove(function() {
   Game.create({
     name: "Beginners Game",
-    date: Date.now() - (24*60*60*1000),
+    date: Date.now() + (24*60*60*1000),
+    location: "Bol Park",
+    players: [{name: "Genki", id: 1}],
+    mentors: [{name: "Momo", id: 2}]
+  }, {
+   name: "Beginners Game",
+    date: Date.now() - (2*24*60*60*1000),
     location: "Bol Park",
     players: [{name: "Genki", id: 1}],
     mentors: [{name: "Momo", id: 2}]

@@ -2,11 +2,12 @@
     <md-button class="md-fab md-primary menuHeader md-mini"><i class="fa fa-refresh"></i></md-button>
 </shell>
 <md-content md-theme="default" style="background-color: rgb(240, 240, 250);" layout="column" flex>
-    <md-button ng-click="newGameDialog()">Host New Game</md-button>
+    <md-button ng-if="user.is_mentor" ng-click="newGameDialog()">Host New Game</md-button>
     <div layout="column">
         <div layout="column" layout-margin>
             <md-card ng-repeat="game in games">
-                <md-subheader>Upcoming Game</md-subheader>
+                <md-subheader ng-show="!game.joined">Upcoming Game</md-subheader>
+                <md-subheader style="background-color: lightgreen" ng-show="game.joined">Upcoming Game</md-subheader>
                 <md-card-title style="cursor: pointer;">
                     <md-card-title-text class="no-outline">
                         <span class="md-headline">{{game.name}}</span>
@@ -18,12 +19,14 @@
                 <md-card-content layout="column" layout-align="space-between">
                     <div class="md-media-md card-media" layout="column">
                         <span><i class="fa fa-user"></i>  Invited Players: 12</span>
-                        <p><i class="fa fa-calendar"></i> Date: {{game.date}}</p>
+                        <p><i class="fa fa-calendar"></i> Date: {{game.date | beautifyDate}}</p>
                         <span><i class="fa fa-map-marker"></i>  Location: {{game.location}}</span>
                     </div>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="showGroupDialog()"> <i class="fa fa-forward"></i>Show more</md-button>
-                        <md-button> <i class="fa fa-check"></i>Join</md-button>
+                        <md-button ng-click="showGroupDialog(game)"> <i class="fa fa-forward"></i>Show more</md-button>
+                        <md-button ng-click="joinGame(game)">
+                            <span ng-show="!game.joined"> <i class="fa fa-check"></i>join</span>
+                            <span ng-show="game.joined"><i class="fa fa-cross"></i>leave</span></md-button>
                     </md-card-actions>
                 </md-card-content>
             </md-card>

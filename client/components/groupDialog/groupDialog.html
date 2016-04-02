@@ -10,7 +10,14 @@
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content">
-                See who will join
+                <h2>{{game.name}}</h2>
+                <div layout="column">
+                        <span><i class="fa fa-user"></i>  Invited Players: 12</span>
+                        <p><i class="fa fa-calendar"></i> Date: {{game.date | beautifyDate}}</p>
+                        <span><i class="fa fa-map-marker"></i>  Location: {{game.location}}</span>
+                    </div>
+                    <br>
+                <p>See who will join</p>
                 <md-list>
                     <md-subheader class="md-no-sticky">Mentors</md-subheader>
                     <md-list-item ng-repeat="person in persons">
@@ -22,14 +29,14 @@
                     </md-list-item>
                 </md-list>
                 <md-input-container class="md-block">
-                    <label>Check this out, because ...</label>
+                    <label>leave a comment</label>
                     <textarea ng-model="comment"></textarea>
                 </md-input-container>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-            <md-button ng-click="answer()" style="margin-right:20px;">
-                Save
+            <md-button ng-click="cancel()" style="margin-right:20px;">
+                close
             </md-button>
         </md-dialog-actions>
     </form>
