@@ -9,7 +9,8 @@ var GameSchema = new Schema({
   players: [{name: String, id: Number}],
   mentors: [{name: String, id: Number}],
   date: Date,
-  location: String
+  location: String,
+  zipcode: {type: Number, default: 94306}
 });
 
 module.exports = mongoose.model('Game', GameSchema);
