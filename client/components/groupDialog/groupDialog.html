@@ -21,19 +21,19 @@
             <md-list>
                 <div ng-repeat="role in ['Mentors', 'Players']">
                     <md-subheader class="md-sticky" style="background-color: white">{{role}}</md-subheader>
-                    <div ng-repeat="person in persons" layout="column">
+                    <div ng-repeat="person in game[role]" layout="column">
                         <md-list-item class="md-2-line secondary-button-padding">
                             <div layout="row">
-                                <img ng-src="" class="md-avatar" alt="" />
+                                <img ng-src="{{imgUrl}}" class="md-avatar" alt="" />
                                 <div class="md-list-item-text">
                                     <h3>{{ person.name }}</h3>
                                     <p></p>
-                                    <md-button class="md-secondary" ng-click="person.showMore=!person.showMore"><i class="fa fa-chevron-down"></i>more</md-button>
+                                    <md-button class="md-secondary" ng-click="person.showMore=!person.showMore"><i class="fa fa-chevron-down"></i></md-button>
                                 </div>
                             </div>
                         </md-list-item>
                         <div ng-show="person.showMore">
-                            ...
+                            Working as a Software Engineer
                             <md-input-container class="md-block">
                                 <label>Comment</label>
                                 <textarea ng-model="comment"></textarea>
