@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-    .controller('ProfileCtrl', function ($scope, $mdToast, $mdDialog, User) {
+    .controller('ProfileCtrl', function ($scope, $mdToast, $mdDialog, $location, User) {
             $scope.imgUrl = '/assets/images/person_placeholder.png';
             $scope.max_skill_level = 5;
             $scope.positions = ["Goalkeeper", "Defense", "Midfielder", "Forwards", "Left", "Right", "Center"];

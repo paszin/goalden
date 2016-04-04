@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-    .controller('FeedbackCtrl', function ($scope) {
-        $scope.profile = {feedback_count: 10, games_count: 6};
+    .controller('FeedbackCtrl', function ($scope, Auth) {
+        var user = Auth.getCurrentUser();
+        $scope.profile = {
+            feedback_count: user.feedback_count,
+            games_count: user.games_count
+        };
         $scope.data = {
-            labels: ['Thumbs Up', 'Smile', 'Excellent Player', 'High Five'],
+            labels: ['Thumbs Up', 'Positive<br>Attitude', 'Excellent Player', 'High Five'],
             series: [
-                    [5, 4, 3, 7]
+                    [user.feedback.thumbs_up, user.feedback.smile, user.feedback.excellent_player, user.feedback.high_five]
                 ],
-            
-                horizontalBars: true
-            
+            horizontalBars: true
         };
     });

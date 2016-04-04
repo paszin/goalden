@@ -1,7 +1,6 @@
 <div ng-controller="ShellCtrl" class="main-shell">
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
         <md-toolbar class="md-tall md-accent ">
-
             <div ng-if="isLoggedIn()" layout="column" layout-padding class="profile-container menuHeader">
                 <div flex><img class="logo" src="assets/images/goalden_logo_horizontal_gold.png"/></div>
                 <div class="profileInfo" layout-padding layout="column">
@@ -9,38 +8,37 @@
                     <!--<div class="profile-email">{{ getCurrentUser().email }}</div>-->
                 </div>
             </div>
-
         </md-toolbar>
 
         <md-content layout="column" layout-margin>
-            <md-button ng-click="goTo('dashboard')" layout-margin class="menuButton">
+            <md-button ng-click="goTo('dashboard')" layout-margin class="menuButton" aria-label="dashboard">
                 <i class="fa fa-heart"></i>Dashboard</md-button>
-            <md-button ng-click="goTo('profile')" layout-margin class="menuButton">
+            <md-button ng-click="goTo('profile')" layout-margin class="menuButton" aria-label="profile">
                 <i class="fa fa-user"></i>Profile</md-button>
-            <md-button ng-click="goTo('feedback')" layout-margin class="menuButton">
+            <md-button ng-click="goTo('feedback')" layout-margin class="menuButton" aria-label="feedback">
                 <i class="fa fa-thumbs-up"></i>Feedback</md-button>
-            <md-button ng-click="goTo('groups')" layout-margin class="menuButton">
+            <md-button ng-disabled="true" ng-click="goTo('groups')" layout-margin class="menuButton" aria-label="dashboard">
                 <i class="fa fa-child"></i>Games</md-button>
-            <md-button ng-click="goTo('groups')" layout-margin class="menuButton">
+            <md-button ng-disabled="true" ng-click="goTo('groups')" layout-margin class="menuButton" aria-label="dashboard">
                 <i class="fa fa-calendar"></i>Calendar</md-button>
-            <md-button ng-click="goTo('groups')" layout-margin class="menuButton">
+            <md-button  ng-disabled="true" ng-click="goTo('groups')" layout-margin class="menuButton" aria-label="dashboard">
                 <i class="fa fa-search"></i>Search</md-button>
-            <md-button ng-click="goTo('groups')" layout-margin class="menuButton">
+            <md-button ng-disabled="true" ng-click="goTo('groups')" layout-margin class="menuButton" aria-label="dashboard">
                 <i class="fa fa-question"></i>Help</md-button>
                 
-            <md-button ng-hide="isLoggedIn()" layout-margin ui-sref="login" class="menuButton">
+            <md-button ng-hide="isLoggedIn()" layout-margin ui-sref="login" class="menuButton" aria-label="dashboard">
                 <i class="fa fa-sign-in"></i>Login</md-button>
-            <md-button ng-hide="isLoggedIn()" layout-margin ui-sref="signup" class="menuButton">
+            <md-button ng-hide="isLoggedIn()" layout-margin ui-sref="signup" class="menuButton" aria-label="dashboard">
                 <i class="fa fa-sign-in"></i>Signup</md-button>
-            <md-button ng-show="isLoggedIn()" layout-margin ng-click="logout()" class="menuButton">
-                <i class="fa fa-sign-in"></i>Logout</md-button>
+            <md-button ng-show="isLoggedIn()" layout-margin ng-click="logout()" class="menuButton" aria-label="dashboard">
+                <i class="fa fa-sign-out"></i>Logout</md-button>
         </md-content>
     </md-sidenav>
     
     
     <md-toolbar class="menu-toolbar">
         <div class="md-toolbar-tools menuHeader">
-            <md-button flex ng-click="toggleLeft()" aria-label="Settings" class="md-fab menuButton menuHeader">
+            <md-button ng-click="toggleLeft()" aria-label="Settings" class="md-fab md-mini menuButton menuHeader" aria-label="sidenav" layout-align="center center">
                 <i class="fa fa-bars fa-15x"></i>
             </md-button>
             <span flex></span>

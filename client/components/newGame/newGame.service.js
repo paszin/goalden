@@ -6,8 +6,9 @@
 
 
 
-function DialogControllerNewGame($scope, $mdDialog, track_id) {
+function DialogControllerNewGame($scope, $mdDialog, Game, track_id) {
     $scope.track_id = track_id;
+    $scope.game = {};
     
     $scope.hide = function () {
         $mdDialog.hide();
@@ -16,6 +17,7 @@ function DialogControllerNewGame($scope, $mdDialog, track_id) {
         $mdDialog.cancel();
     };
     $scope.answer = function () {
+        Game.post($scope.game);
     };
 }
 
@@ -27,7 +29,7 @@ function DialogControllerNewGame($scope, $mdDialog, track_id) {
 function NewGameDialog($log, $mdDialog, $mdMedia) {
 
     this.show = function (track_id) {
-        var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
+        var useFullScreen = true; //($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
             controller: DialogControllerNewGame,
             locals: {

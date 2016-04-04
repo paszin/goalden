@@ -74,7 +74,7 @@ exports.showGames = function(req, res) { // api/games/users/:uid
 
         var date = games[i].date;
         var now = Date.now();
-        if (now - date >= 0) { // upcoming
+        if (now <= date) { // upcoming
 
           // create mentors list
           var mentorIds = games[i].mentors;
