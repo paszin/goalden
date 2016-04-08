@@ -1,6 +1,6 @@
 {
   "name": "goalden-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "server/app.js",
   "dependencies": {
     "async": "^1.5.2",
