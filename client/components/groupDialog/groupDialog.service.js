@@ -7,9 +7,9 @@
 
 
 function DialogController($scope, $mdDialog, game) {
-    //$scope.game = game;
+    $scope.game = game;
     $scope.imgUrl = '/assets/images/person_placeholder.png';
-    $scope.game = {Players: [{
+    /*$scope.game = {Players: [{
         name: "Mike"
     }, {
         name: "Thomas"
@@ -28,7 +28,7 @@ function DialogController($scope, $mdDialog, game) {
         name: "Marie",
         showFeedback: false
     }]};
-    
+    */
     $scope.hide = function () {
         $mdDialog.hide();
     };

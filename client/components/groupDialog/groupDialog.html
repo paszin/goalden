@@ -19,8 +19,8 @@
             <br>
             <p>See who will join</p>
             <md-list>
-                <div ng-repeat="role in ['Mentors', 'Players']">
-                    <md-subheader class="md-sticky" style="background-color: white">{{role}}</md-subheader>
+                <div ng-repeat="role in ['mentors', 'players']">
+                    <md-subheader class="md-sticky" style="background-color: white">{{role | ucfirst }}</md-subheader>
                     <div ng-repeat="person in game[role]" layout="column">
                         <md-list-item class="md-2-line secondary-button-padding">
                             <div layout="row">
@@ -33,11 +33,7 @@
                             </div>
                         </md-list-item>
                         <div ng-show="person.showMore">
-                            Working as a Software Engineer
-                            <md-input-container class="md-block">
-                                <label>Comment</label>
-                                <textarea ng-model="comment"></textarea>
-                            </md-input-container>
+                            <p>{{person.introduction}}</p>
                         </div>
                     </div>
                 </div>
