@@ -8,7 +8,9 @@ angular.module('goaldenAppApp')
         }, {
             getAll: {
                 method: 'GET'
+            },
+            post: {
+                method: 'POST'
             }
         });
     });
-

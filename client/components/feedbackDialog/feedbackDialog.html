@@ -14,7 +14,7 @@
             <md-list>
                 <div ng-repeat="role in roles">
                     <md-subheader class="md-sticky" style="background-color: white">{{role}}</md-subheader>
-                    <div ng-repeat="person in persons" layout="column">
+                    <div ng-repeat="person in game[role]" layout="column">
                         <md-list-item class="md-2-line secondary-button-padding">
                             <div layout="row">
                                 <img src="{{imgUrl}}" class="md-avatar" alt="" />
@@ -49,7 +49,7 @@
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-        <md-button class="md-accent md-raised" ng-click="answer()" style="margin-right:20px;">
+        <md-button class="md-accent md-raised" ng-click="cancel()" style="margin-right:20px;">
             Save
         </md-button>
     </md-dialog-actions>

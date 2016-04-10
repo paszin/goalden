@@ -2,17 +2,28 @@
 
 
 
-function DialogControllerFeedback($scope, $mdDialog, track_id) {
-    $scope.track_id = track_id;
+function DialogControllerFeedback($scope, $mdDialog, game) {
+    $scope.game = game;
     $scope.roles = ["Mentors", "Players"];
-    $scope.persons = [{
-        name: "Mike Meiker"
+    $scope.game = {Players: [{
+        name: "Mike"
     }, {
-        name: "Thomas Muller"
+        name: "Thomas"
     }, {
-        name: "Michael Ballack",
-        showFeedback: true
-    }];
+        name: "Naomi"
+    },{
+        name: "Yuri"
+    },{
+        name: "Timur"
+    },{
+        name: "John",
+        showFeedback: false
+    }], Mentors: [{
+        name: "Omar"
+    }, {
+        name: "Marie",
+        showFeedback: false
+    }]};
     $scope.imgUrl = '/assets/images/person_placeholder.png';
     $scope.feedbackOptions = [{
         icon: "fa fa-thumbs-up",
@@ -59,12 +70,12 @@ function DialogControllerFeedback($scope, $mdDialog, track_id) {
 //
 function FeedbackDialog($log, $mdDialog, $mdMedia) {
 
-    this.show = function (track_id) {
+    this.show = function (game) {
         var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
             controller: DialogControllerFeedback,
             locals: {
-                track_id: track_id
+                game: game
             },
             templateUrl: "components/feedbackDialog/feedbackDialog.html",
             parent: angular.element(document.body),
