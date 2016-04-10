@@ -116,6 +116,7 @@ exports.updateUser = function(req, res, next) {
   });
 };
 
+// submit feedback
 exports.submitFeedback = function(req, res, next) {
   var user_id_from = req.params.uid_from;
   var user_id_to = req.params.uid_to;
@@ -128,6 +129,7 @@ exports.submitFeedback = function(req, res, next) {
     });
   });
 };
+
 /**
  * Get my info
  */
