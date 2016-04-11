@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var underscore = require('underscore');
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -102,13 +103,13 @@ exports.updateUser = function(req, res, next) {
   var userId = req.user._id;
   User.findById(userId, function(err, user) {
     user.skill_level = req.body.skill_level,
-    user.positions = req.body.positions,
-    user.introduction = req.body.introduction,
-    user.zip_code = req.body.zip_code,
-    user.timetable = req.body.timetable,
-    user.languages = req.body.languages,
-    user.age = req.body.age,
-    user.sex = req.body.sex;
+      user.positions = req.body.positions,
+      user.introduction = req.body.introduction,
+      user.zip_code = req.body.zip_code,
+      user.timetable = req.body.timetable,
+      user.languages = req.body.languages,
+      user.age = req.body.age,
+      user.sex = req.body.sex;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.status(200).send('OK');
@@ -116,16 +117,34 @@ exports.updateUser = function(req, res, next) {
   });
 };
 
-// submit feedback
+// submit feedback, thumbs_up, positive_attitude, excellent_player, high_five
 exports.submitFeedback = function(req, res, next) {
   var user_id_from = req.params.uid_from;
   var user_id_to = req.params.uid_to;
-  var feedback = req.body;
+  var feedback = req.body.feedback;
   User.findById(user_id_to, function(err, user) {
-    user.feedback["excellent_player"] += (feedback["excellent_player"]||0);
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.status(200).send('EPIC');
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!user) {
+      return res.status(404).send('User Not Found');
+    }
+    underscore.mapObject(feedback, function(val, key) {
+      var thisFeedback = underscore.find(user.feedback, function(currentFeedback) {
+        return currentFeedback.name == key;
+      });
+      if (!thisFeedback) {
+        var newFeedback = {};
+        newFeedback["name"] = key;
+        newFeedback["count"] = 1;
+        user.feedback.push(newFeedback);
+        thisFeedback = newFeedback;
+      }
+      thisFeedback["count"] += (val || 0);
+    });
+    user.save(function(err2) {
+      if (err2) return validationError(res, err2);
+      res.status(200).send('Feedback has been successfully submitted!');
     });
   });
 };
