@@ -63,72 +63,12 @@ exports.showGames = function(req, res) { // api/games/users/:uid
       var passed = [];
       for (var i = 0; i < games.length; i++) {
 
-        // copy game object
-        var thisGame = {};
-        thisGame["_id"] = games[i]._id;
-        thisGame["name"] = games[i].name;
-        thisGame["date"] = games[i].date;
-        thisGame["location"] = games[i].location;
-        thisGame["zipcode"] = games[i].zipcode;
-        thisGame["__v"] = games[i].__v;
-
         var date = games[i].date;
         var now = Date.now();
         if (now <= date) { // upcoming
-
-          // create mentors list
-          var mentorIds = games[i].mentors;
-          thisGame.mentors = [];
-          for (var j = 0; j < mentorIds.length; j++) {
-            thisGame.mentors.push(usersObject[mentorIds[j]._id]);
-          }
-
-          // create players list
-          var playerIds = games[i].players;
-          thisGame.players = [];
-          for (var j = 0; j < playerIds.length; j++) {
-            thisGame.players.push(usersObject[playerIds[j]._id]);
-          }
-
-          // estimated_players
-          thisGame.estimated_players = thisGame.zipcode%7 + 8;
-
-          upcoming.push(thisGame);
+          upcoming.push(games[i]);
         } else { // the games that happened in the past and he attended.
-          var thisUserInGame = false;
-          var mentors = games[i].mentors;
-
-          for (var j = 0; j < mentors.length; j++) {
-            if (mentors[j]._id == req.params.uid)
-              thisUserInGame = true;
-          }
-
-          var players = games[i].players;
-          for (var j = 0; j < players.length; j++) {
-            if (players[j]._id == req.params.uid)
-              thisUserInGame = true;
-          }
-
-          if (true) {
-
-            // create mentors list
-            var mentorIds = games[i].mentors;
-            thisGame.mentors = [];
-            for (var j = 0; j < mentorIds.length; j++) {
-              thisGame.mentors.push(usersObject[mentorIds[j]._id]);
-            }
-
-            // create players list
-            var playerIds = games[i].players;
-            thisGame.players = [];
-            for (var j = 0; j < playerIds.length; j++) {
-              thisGame.players.push(usersObject[playerIds[j]._id]);
-            }
-
-            passed.push(thisGame);
-
-          }
-          
+          passed.push(games[i]);
         }
 
       } // end for
