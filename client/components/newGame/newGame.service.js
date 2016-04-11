@@ -6,8 +6,7 @@
 
 
 
-function DialogControllerNewGame($scope, $mdDialog, Game, track_id) {
-    $scope.track_id = track_id;
+function DialogControllerNewGame($scope, $mdDialog, Game) {
     $scope.game = {};
     
     $scope.hide = function () {
@@ -28,13 +27,10 @@ function DialogControllerNewGame($scope, $mdDialog, Game, track_id) {
  */
 function NewGameDialog($log, $mdDialog, $mdMedia) {
 
-    this.show = function (track_id) {
+    this.show = function () {
         var useFullScreen = true; //($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
             controller: DialogControllerNewGame,
-            locals: {
-                track_id: track_id
-            },
             templateUrl: "components/newGame/newGameDialog.html",
             parent: angular.element(document.body),
             //targetEvent: ev,

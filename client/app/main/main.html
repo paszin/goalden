@@ -23,7 +23,7 @@
                         <span><i class="fa fa-map-marker"></i>  Field: {{game.location}}</span>
                     </div>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="showGroupDialog(game)"> <i class="fa fa-forward"></i>Show more</md-button>
+                        <md-button ng-click="showGameDialog(game)"> <i class="fa fa-forward"></i>Show more</md-button>
                         <md-button ng-click="joinGame(game)">
                             <span ng-show="!game.joined"> <i class="fa fa-check"></i>join</span>
                             <span ng-show="game.joined"><i class="fa fa-times"></i>leave</span></md-button>
