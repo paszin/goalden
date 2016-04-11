@@ -37,7 +37,7 @@
             <!--PASSED-->
             <md-card ng-repeat="game in passed">
                 <md-subheader ng-show="!game.joined">Passed Game</md-subheader>
-                <md-subheader style="background-color: lightgreen" ng-show="game.joined">Upcoming Game</md-subheader>
+                <md-subheader style="background-color: lightgreen" ng-show="game.joined">Passed Game</md-subheader>
                 <md-card-title style="cursor: pointer;">
                     <md-card-title-text class="no-outline">
                         <span class="md-headline">{{game.name}}</span>
