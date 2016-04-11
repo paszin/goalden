@@ -25,9 +25,9 @@
                         <span><i class="fa fa-map-marker"></i>  Field: {{game.location}}</span>
                     </div>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="showGameDialog(game)"> <i class="fa fa-info"></i> details</md-button>
+                        <md-button ng-click="showGameDialog(game)"><i class="fa fa-info"></i> details</md-button>
                         <md-button ng-click="joinGame(game)">
-                            <span ng-show="!game.joined"> <i class="fa fa-check"></i> join</span>
+                            <span ng-show="!game.joined"><i class="fa fa-check"></i> join</span>
                             <span ng-show="game.joined"><i class="fa fa-times"></i> leave</span></md-button>
                     </md-card-actions>
                 </md-card-content>
@@ -41,7 +41,7 @@
                 <md-card-title style="cursor: pointer;">
                     <md-card-title-text class="no-outline">
                         <span class="md-headline">{{game.name}}</span>
-                        <span class="md-subhead">2 Mentors and 8 Players are going</span>
+                        <span class="md-subhead">2 Mentors and 8 Players joined</span>
                     </md-card-title-text>
                     <div style="border-radius:  100%; width: 75px; height:75px; background-color: #FDC70C; color: black; font-size:20pt; margin-top: -11px;" layout layout-align="center center"><i class="fa fa-users"></i></div>
                 </md-card-title>
