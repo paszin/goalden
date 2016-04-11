@@ -7,7 +7,7 @@ angular.module('goaldenAppApp')
         $scope.showFeedbackDialog = FeedbackDialog.show;
         $scope.newGameDialog = NewGameDialog.show;
 
-       
+
         //$scope.user = Auth.getCurrentUser();
         $scope.user = User.get();
         //Auth.getCurrentUser().then(function(data) {debugger});
@@ -29,12 +29,25 @@ angular.module('goaldenAppApp')
         $scope.joinGame = function (game) {
             game.joined = !game.joined;
             if (game.joined) {
-                game.players.push($scope.user);
+                if ($scope.user.is_mentor) {
+                    game.mentors.push($scope.user);
+                } else {
+                    game.players.push($scope.user);
+                }
+
                 $http.post("/api/games/" + game._id + "/users/" + $scope.user._id + "/join");
             } else {
-                $scope.games = _.reject($scope.games, {
-                    "_id": $scope.user._id
-                });
+                if ($scope.user.is_mentor) {
+                    game.mentors = _.reject($scope.games.mentors, {
+                        "_id": $scope.user._id
+                    });
+                } else {
+                    game.players = _.reject($scope.games.players, {
+                        "_id": $scope.user._id
+                    });
+                }
+
+                $http.post("/api/games/" + game._id + "/users/" + $scope.user._id + "/leave");
             }
         };
 
