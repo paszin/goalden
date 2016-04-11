@@ -80,7 +80,7 @@ exports.showGames = function(req, res) { // api/games/users/:uid
             if (player["_id"] == req.params.uid) isJoined = true;
           });
           userObject["joined"] = isJoined;
-          upcoming.push(clone);
+          upcoming.push(userObject);
         } else { // the games that happened in the past and he attended.
           var isJoined = false;
           underscore.each(userObject["mentors"], function(mentor) {
