@@ -52,12 +52,6 @@ exports.showGames = function(req, res) { // api/games/users/:uid
         return res.status(404).send('User Not Found');
       }
 
-      // users to object
-      var usersObject = {};
-      for (var j = 0; j < users.length; j++) {
-        usersObject[users[j]._id] = users[j];
-      }
-
       var returnGames = {};
       var upcoming = [];
       var passed = [];
