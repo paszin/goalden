@@ -2,28 +2,9 @@
 
 
 
-function DialogControllerFeedback($scope, $mdDialog, game) {
+function DialogControllerFeedback($scope, $mdDialog, $http, Auth, game) {
     $scope.game = game;
-    $scope.roles = ["Mentors", "Players"];
-    $scope.game = {Players: [{
-        name: "Mike"
-    }, {
-        name: "Thomas"
-    }, {
-        name: "Naomi"
-    },{
-        name: "Yuri"
-    },{
-        name: "Timur"
-    },{
-        name: "John",
-        showFeedback: false
-    }], Mentors: [{
-        name: "Omar"
-    }, {
-        name: "Marie",
-        showFeedback: false
-    }]};
+    $scope.roles = ["mentors", "players"];
     $scope.imgUrl = '/assets/images/person_placeholder.png';
     $scope.feedbackOptions = [{
         icon: "fa fa-thumbs-up",
@@ -64,14 +45,29 @@ function DialogControllerFeedback($scope, $mdDialog, game) {
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
-    $scope.answer = function () {};
+    $scope.answer = function () {
+        var i;
+        for (i=0; i<$scope.game.players.length; i++) {
+            var to_player = $scope.game.players[i];
+            var data = {};
+            for (var fi=0; fi<$scope.feedbackOptions.length; fi++) {
+                if (to_player.hasOwnProperty($scope.feedbackOptions[fi].name) && to_player[$scope.feedbackOptions[fi].name]) {
+                    data[$scope.feedbackOptions[fi].name] = 1;
+                }
+            }
+            if (Object.keys(data).length > 0) {
+                $http.post("users/" + Auth.getCurrentUser()._id + "/feedback/" + to_player._id, data);
+            }
+        }
+        //$scope.hide();
+    };
 }
 
 //
 function FeedbackDialog($log, $mdDialog, $mdMedia) {
 
     this.show = function (game) {
-        var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
+        var useFullScreen = true; //($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
             controller: DialogControllerFeedback,
             locals: {

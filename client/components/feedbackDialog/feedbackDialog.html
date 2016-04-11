@@ -13,7 +13,7 @@
             Give others some feedback
             <md-list>
                 <div ng-repeat="role in roles">
-                    <md-subheader class="md-sticky" style="background-color: white">{{role}}</md-subheader>
+                    <md-subheader class="md-sticky" style="background-color: white">{{role | ucfirst}}</md-subheader>
                     <div ng-repeat="person in game[role]" layout="column">
                         <md-list-item class="md-2-line secondary-button-padding">
                             <div layout="row">
@@ -36,10 +36,10 @@
                                     <span flex>{{feedback.info}}</span>
                                 </div>
                             </div>
-                            <md-input-container class="md-block">
+                            <!--<md-input-container class="md-block">
                                 <label>Comment</label>
                                 <textarea ng-model="comment"></textarea>
-                            </md-input-container>
+                            </md-input-container>-->
                         </div>
                         <md-divider></md-divider>
                     </div>
@@ -49,9 +49,8 @@
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-        <md-button class="md-accent md-raised" ng-click="cancel()" style="margin-right:20px;">
+        <md-button class="md-accent md-raised" ng-click="answer()" style="margin-right:20px;">
             Save
         </md-button>
     </md-dialog-actions>
-    </form>
 </md-dialog>
