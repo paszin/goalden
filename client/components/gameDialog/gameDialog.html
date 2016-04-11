@@ -12,7 +12,7 @@
         <div class="md-dialog-content">
             <h2>{{game.name}}</h2>
             <div layout="column">
-                <span><i class="fa fa-user"></i>  Invited Players: {{game.estimated_players}}</span>
+                <!--<span><i class="fa fa-user"></i>  Invited Players: {{game.estimated_players}}</span>-->
                 <p><i class="fa fa-calendar"></i> Date: {{game.date | beautifyDate}}</p>
                 <span><i class="fa fa-map-marker"></i>  Location: {{game.location}}</span>
             </div>
@@ -28,12 +28,15 @@
                                 <div class="md-list-item-text">
                                     <h3>{{ person.name }}</h3>
                                     <p></p>
-                                    <md-button class="md-secondary" ng-click="person.showMore=!person.showMore"><i class="fa fa-chevron-down"></i></md-button>
+                                    <md-button class="md-secondary" ng-click="showPersonDetails(person)"><i class="fa fa-chevron-down"></i></md-button>
                                 </div>
                             </div>
                         </md-list-item>
                         <div ng-show="person.showMore">
-                            <p>{{person.introduction}}</p>
+                            <p>{{person.profile.introduction}}</p>
+                            <section> <i class="fa fa-language"></i> Speaks: {{person.profile.languages.join(",")}}</section>
+                            <section>Skill Level: {{person.profile.skill_level}}/5
+                            </section>
                         </div>
                     </div>
                 </div>

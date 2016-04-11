@@ -79,8 +79,14 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
+      '_id': this._id,
       'name': this.name,
-      'role': this.role
+      'introduction': this.introduction,
+      'languages': this.languages,
+      'age': this.age,
+      'sex': this.sex,
+      'skill_level': this.skill_level,
+      'positions': this.positions
     };
   });
 

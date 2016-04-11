@@ -6,29 +6,22 @@
 
 
 
-function DialogController($scope, $mdDialog, game) {
+function GameDialogController($scope, $mdDialog, $http, game, User) {
     $scope.game = game;
+    
     $scope.imgUrl = '/assets/images/person_placeholder.png';
-    /*$scope.game = {Players: [{
-        name: "Mike"
-    }, {
-        name: "Thomas"
-    }, {
-        name: "Naomi"
-    },{
-        name: "Yuri"
-    },{
-        name: "Timur"
-    },{
-        name: "John",
-        showFeedback: false
-    }], Mentors: [{
-        name: "Omar"
-    }, {
-        name: "Marie",
-        showFeedback: false
-    }]};
-    */
+    
+    $scope.showPersonDetails = function (person) {
+        
+        person.showMore =! person.showMore;
+        
+        User.getById({id: person._id}, 
+                     function(data) {
+                        person.profile = data;
+                    }
+                );
+    };
+    
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -42,14 +35,15 @@ function DialogController($scope, $mdDialog, game) {
 /**
  * @ngdoc service
  * @name core.Services.
- * @description  Service
+ * @description  ServiceshowPersonDetails()
  */
 function GameDialog($log, $mdDialog, $mdMedia) {
 
     this.show = function (game) {
-        var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
+        
+        var useFullScreen = true //($mdMedia("sm") || $mdMedia("xs"));
         $mdDialog.show({
-            controller: DialogController,
+            controller: GameDialogController,
             locals: {
                 game: game
             },
