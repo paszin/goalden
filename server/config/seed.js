@@ -15,12 +15,6 @@ var Group = require('../api/group/group.model');
 User.find({}).remove(function() {
   User.create({
       provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'admin@admin.com',
-      password: 'admin1'
-    }, {
-      provider: 'local',
       id: 1,
       name: 'Genki',
       email: 'genki@test.com',
@@ -94,33 +88,26 @@ User.find({}).remove(function() {
 
     },
     function() {
-      console.log('finished populating users');
-    });
-});
 
-
-Group.find({}).remove(function() {
-    Group.create({
-      name: "Group #1",
-      date: Date.now(),
-      location: "Rengstorff Park",
-      participants: []
-    })
-  });
-
-Game.find({}).remove(function() {
-  Game.create({
-    name: "Beginners Game",
-    date: Date.now() + (24*60*60*1000),
-    location: "Bol Park",
-    players: [],
-    mentors: []
-  }, {
-   name: "Beginners Game",
-    date: Date.now() - (2*24*60*60*1000),
-    location: "Bol Park",
-    players: [],
-    mentors: []
-  })
-});
+      User.findOne({"name": "Genki"}, function(err, user) {
+          Game.find({}).remove(function() {
+              Game.create({
+                name: "Beginners Game",
+                date: Date.now() + (24*60*60*1000),
+                location: "Bol Park",
+                players: [{name: user.name, "_id": user._id}],
+                mentors: []
+              }, {
+               name: "Beginners Game",
+                date: Date.now() - (2*24*60*60*1000),
+                location: "Bol Park",
+                players: [{name: user.name, "_id": user._id}],
+                mentors: []
+              }, function() {
+                   console.log('finished populating data');
+                });
+            }); //remove
+      }); //findOne
+    }); //user create
+}); //user find
 
