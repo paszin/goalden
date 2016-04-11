@@ -1,7 +1,9 @@
 <shell>
     <md-button class="md-fab md-primary menuHeader md-mini" ng-click="refresh()"><i class="fa fa-refresh fa-15x"></i></md-button>
 </shell>
+
 <md-content md-theme="default" style="background-color: rgb(240, 240, 250);" layout="column" flex>
+
     <md-button ng-if="user.is_mentor" ng-click="newGameDialog()">Host New Game</md-button>
     <div layout="column">
         <div layout="column" layout-margin>
@@ -23,15 +25,15 @@
                         <span><i class="fa fa-map-marker"></i>  Field: {{game.location}}</span>
                     </div>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="showGroupDialog(game)"> <i class="fa fa-forward"></i>Show more</md-button>
+                        <md-button ng-click="showGameDialog(game)"> <i class="fa fa-info"></i> details</md-button>
                         <md-button ng-click="joinGame(game)">
-                            <span ng-show="!game.joined"> <i class="fa fa-check"></i>join</span>
-                            <span ng-show="game.joined"><i class="fa fa-times"></i>leave</span></md-button>
+                            <span ng-show="!game.joined"> <i class="fa fa-check"></i> join</span>
+                            <span ng-show="game.joined"><i class="fa fa-times"></i> leave</span></md-button>
                     </md-card-actions>
                 </md-card-content>
             </md-card>
 
-            
+
             <!--PASSED-->
             <md-card ng-repeat="game in passed">
                 <md-subheader ng-show="!game.joined">Passed Game</md-subheader>
@@ -57,5 +59,6 @@
         </div>
 
     </div>
-    
-    </md-content>
+
+
+</md-content>

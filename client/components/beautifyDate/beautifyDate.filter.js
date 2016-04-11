@@ -9,7 +9,7 @@ angular.module('goaldenAppApp')
                 if (date === void 0) {
                     return void 0;
                 }
-                return moment(date).format("MM/DD") + " ("  + moment(date).fromNow() + ")";
+                return moment(date).format("MM/DD, HH:mm") + " ("  + moment(date).fromNow() + ")";
             };
         }
     ]);
