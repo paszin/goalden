@@ -55,14 +55,42 @@ exports.showGames = function(req, res) { // api/games/users/:uid
       var returnGames = {};
       var upcoming = [];
       var passed = [];
+
       for (var i = 0; i < games.length; i++) {
+
+        var userObject = {};
+        userObject["_id"] = games[i]["_id"];
+        userObject["name"] = games[i]["name"];
+        userObject["date"] = games[i]["date"];
+        userObject["location"] = games[i]["location"];
+        userObject["__v"] = games[i]["__v"];
+        userObject["zipcode"] = games[i]["zipcode"];
+        userObject["mentors"] = games[i]["mentors"];
+        userObject["players"] = games[i]["players"];
 
         var date = games[i].date;
         var now = Date.now();
+
         if (now <= date) { // upcoming
-          upcoming.push(games[i]);
+          var isJoined = false;
+          underscore.each(userObject["mentors"], function(mentor) {
+            if (mentor["_id"] == req.params.uid) isJoined = true;
+          });
+          underscore.each(userObject["players"], function(player) {
+            if (player["_id"] == req.params.uid) isJoined = true;
+          });
+          userObject["joined"] = isJoined;
+          upcoming.push(clone);
         } else { // the games that happened in the past and he attended.
-          passed.push(games[i]);
+          var isJoined = false;
+          underscore.each(userObject["mentors"], function(mentor) {
+            if (mentor["_id"] == req.params.uid) isJoined = true;
+          });
+          underscore.each(userObject["players"], function(player) {
+            if (player["_id"] == req.params.uid) isJoined = true;
+          });
+          userObject["joined"] = isJoined;
+          passed.push(userObject);
         }
 
       } // end for
@@ -109,9 +137,13 @@ exports.deleteUser = function(req, res) {
 
       // update game
       if (is_mentor) {
-        game.mentors = underscore.reject(game.mentors, function(mentor){ return mentor._id == req.params.uid });
+        game.mentors = underscore.reject(game.mentors, function(mentor) {
+          return mentor._id == req.params.uid
+        });
       } else {
-        game.players = underscore.reject(game.players, function(mentor){ return mentor._id == req.params.uid });
+        game.players = underscore.reject(game.players, function(mentor) {
+          return mentor._id == req.params.uid
+        });
       }
       game.save(function(err3) {
         if (err3) {
