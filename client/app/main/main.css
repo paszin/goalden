@@ -7,3 +7,9 @@
     font-size: 20pt;
     margin-top: -11px;
 }
+
+.time-middle {
+    position: relative;
+    top: -8px;
+    min-width: 2px;
+}
