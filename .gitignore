@@ -5,4 +5,9 @@ public
 client/bower_components
 dist
 /server/config/local.env.js
+
+## ignore development config
+/server/config/environment/development.js
+
+
 npm-debug.log
