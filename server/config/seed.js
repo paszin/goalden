@@ -98,10 +98,16 @@ User.find({}).remove(function() {
                 players: [{name: user.name, "_id": user._id}],
                 mentors: []
               }, {
-               name: "Beginners Game",
+               name: "Pick Up Game",
                 date: Date.now() - (2*24*60*60*1000),
                 location: "Bol Park",
                 players: [{name: user.name, "_id": user._id}],
+                mentors: []
+              }, {
+               name: "SAP Soccer Group",
+                date: Date.now() - (2*20*60*60*1000),
+                location: "Rengstorff Park",
+                players: [],
                 mentors: []
               }, function() {
                    console.log('finished populating data');
