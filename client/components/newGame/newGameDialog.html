@@ -18,7 +18,25 @@
             </md-input-container>
         </div>
 
-        <md-datepicker ng-model="game.date" md-placeholder="Enter date"></md-datepicker>
+        <md-datepicker ng-model="game.daydate" md-placeholder="Enter date"></md-datepicker>
+        
+        <div layout="row" layout-padding>
+        
+        <form name="timeinput">
+            <i style="color: grey;" class="fa fa-clock-o time-middle fa-15x"></i>
+            <md-input-container>
+                <label>HH</label>
+                <input flex type="number" name="rate" min="0" max="12" ng-model="game.timehhdate">
+            </md-input-container>
+                <span class="time-middle">:</span>
+            <md-input-container>
+                <label>mm</label>
+                <input flex type="number" min="0" max="59" ng-model="game.timemmdate">
+            </md-input-container>
+            <md-button class="time-middle" ng-init="is_am=false" ng-click="is_am=!is_am"><span ng-show="is_am">AM</span><span ng-show="!is_am">PM</span></md-button>
+        </form>
+    </div>
+
 
     </md-dialog-content>
     <md-dialog-actions>
