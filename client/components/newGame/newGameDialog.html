@@ -9,33 +9,46 @@
         </div>
     </md-toolbar>
     <md-dialog-content layout="column" layout-margin>
-        <p layout-margin>Host a new event ... </p>
+        <p layout-margin>Host a new game... </p>
         <div layout="row" layout-align="start start" layout-margin>
-            <i class="fa fa-heart fa-1x"></i>
             <md-input-container>
                 <label>Title</label>
-                <input ng-model="game.name" type="text">
+                <input style="font-size:24px;" ng-model="game.name" type="text">
             </md-input-container>
         </div>
 
+        <md-input-container class="md-block">
+            <label>Info</label>
+            <textarea ng-model="game.info" md-maxlength="150" rows="4" placeholder="Write about your plans for the game"></textarea>
+        </md-input-container>
+
+
+
+
+
         <md-datepicker ng-model="game.daydate" md-placeholder="Enter date"></md-datepicker>
-        
+
         <div layout="row" layout-padding>
-        
-        <form name="timeinput">
-            <i style="color: grey;" class="fa fa-clock-o time-middle fa-15x"></i>
-            <md-input-container>
-                <label>HH</label>
-                <input flex type="number" name="rate" min="0" max="12" ng-model="game.timehhdate">
-            </md-input-container>
+
+            <form name="timeinput">
+                <i style="color: grey;" class="fa fa-clock-o time-middle fa-15x"></i>
+                <md-input-container>
+                    <label>HH</label>
+                    <input flex type="number" name="rate" min="0" max="12" ng-model="game.timehhdate">
+                </md-input-container>
                 <span class="time-middle">:</span>
-            <md-input-container>
-                <label>mm</label>
-                <input flex type="number" min="0" max="59" ng-model="game.timemmdate">
-            </md-input-container>
-            <md-button class="time-middle" ng-init="is_am=false" ng-click="is_am=!is_am"><span ng-show="is_am">AM</span><span ng-show="!is_am">PM</span></md-button>
-        </form>
-    </div>
+                <md-input-container>
+                    <label>mm</label>
+                    <input flex type="number" min="0" max="59" ng-model="game.timemmdate">
+                </md-input-container>
+                <md-button class="time-middle" ng-init="is_am=false" ng-click="is_am=!is_am"><span ng-show="is_am">AM</span><span ng-show="!is_am">PM</span></md-button>
+            </form>
+        </div>
+
+        <md-input-container>
+            <label>Location</label>
+            <input ng-model="game.location" type="text">
+        </md-input-container>
 
 
     </md-dialog-content>

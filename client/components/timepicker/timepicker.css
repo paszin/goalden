@@ -1,0 +1,156 @@
+/** Styles for mdDatepicker. */
+pz-timepicker {
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 18px;
+  margin-right: -18px;
+  vertical-align: middle; }
+  [dir=rtl] pz-timepicker {
+    padding-right: auto;
+    padding-left: 18px; }
+  [dir=rtl] pz-timepicker {
+    margin-right: auto;
+    margin-left: -18px; }
+
+.md-inline-form pz-timepicker {
+  margin-top: 12px; }
+
+.pz-timepicker-button {
+  display: inline-block;
+  box-sizing: border-box;
+  background: none; }
+
+.pz-timepicker-input {
+  font-size: 14px;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background: transparent;
+  min-width: 120px;
+  max-width: 328px; }
+  .pz-timepicker-input::-ms-clear {
+    display: none; }
+
+.pz-timepicker-input-container {
+  position: relative;
+  padding-bottom: 5px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  display: inline-block;
+  width: auto;
+  margin-left: 12px; }
+  [dir=rtl] .pz-timepicker-input-container {
+    margin-left: auto;
+    margin-right: 12px; }
+  .pz-timepicker-input-container.pz-timepicker-focused {
+    border-bottom-width: 2px; }
+
+.pz-timepicker-calendar-pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  border-width: 1px;
+  border-style: solid;
+  background: transparent;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  transition: -webkit-transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .pz-timepicker-calendar-pane.md-pane-open {
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+
+.pz-timepicker-input-mask {
+  height: 40px;
+  width: 340px;
+  position: relative;
+  background: transparent;
+  pointer-events: none;
+  cursor: text; }
+
+.pz-timepicker-input-mask-opaque {
+  position: absolute;
+  right: 0;
+  left: 120px;
+  height: 100%;
+  margin-left: -1px; }
+
+.pz-timepicker-calendar {
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.5, 0, 0.25, 1); }
+  .md-pane-open .pz-timepicker-calendar {
+    opacity: 1; }
+  .pz-timepicker-calendar md-calendar:focus {
+    outline: none; }
+
+.pz-timepicker-expand-triangle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid; }
+
+.pz-timepicker-triangle-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-transform: translateY(-25%) translateX(45%);
+          transform: translateY(-25%) translateX(45%); }
+  [dir=rtl] .pz-timepicker-triangle-button {
+    right: auto;
+    left: 0; }
+  [dir=rtl] .pz-timepicker-triangle-button {
+    -webkit-transform: translateY(-25%) translateX(-45%);
+            transform: translateY(-25%) translateX(-45%); }
+
+.pz-timepicker-triangle-button.md-button.md-icon-button {
+  height: 100%;
+  width: 36px;
+  position: absolute; }
+
+pz-timepicker[disabled] .pz-timepicker-input-container {
+  border-bottom-color: transparent; }
+
+pz-timepicker[disabled] .pz-timepicker-triangle-button {
+  display: none; }
+
+.pz-timepicker-open .pz-timepicker-input-container {
+  margin-left: -12px;
+  margin-bottom: -5px;
+  border: none; }
+  [dir=rtl] .pz-timepicker-open .pz-timepicker-input-container {
+    margin-left: auto;
+    margin-right: -12px; }
+
+.pz-timepicker-open .pz-timepicker-input {
+  margin-left: 24px;
+  height: 40px; }
+  [dir=rtl] .pz-timepicker-open .pz-timepicker-input {
+    margin-left: auto;
+    margin-right: 24px; }
+
+.pz-timepicker-open .pz-timepicker-triangle-button {
+  display: none; }
+
+.pz-timepicker-pos-adjusted .pz-timepicker-input-mask {
+  display: none; }
+
+.pz-timepicker-calendar-pane .md-calendar {
+  -webkit-transform: translateY(-85px);
+          transform: translateY(-85px);
+  transition: -webkit-transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-delay: 0.125s; }
+
+.pz-timepicker-calendar-pane.md-pane-open .md-calendar {
+  -webkit-transform: translateY(0);
+          transform: translateY(0); }
