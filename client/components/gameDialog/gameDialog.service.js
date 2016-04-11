@@ -44,7 +44,7 @@ function DialogController($scope, $mdDialog, game) {
  * @name core.Services.
  * @description  Service
  */
-function GroupDialog($log, $mdDialog, $mdMedia) {
+function GameDialog($log, $mdDialog, $mdMedia) {
 
     this.show = function (game) {
         var useFullScreen = ($mdMedia("sm") || $mdMedia("xs"));
@@ -53,7 +53,7 @@ function GroupDialog($log, $mdDialog, $mdMedia) {
             locals: {
                 game: game
             },
-            templateUrl: "components/groupDialog/groupDialog.html",
+            templateUrl: "components/gameDialog/gameDialog.html",
             parent: angular.element(document.body),
             //targetEvent: ev,
             clickOutsideToClose: true,
@@ -65,4 +65,4 @@ function GroupDialog($log, $mdDialog, $mdMedia) {
 
 
 angular.module('goaldenAppApp')
-  .service('GroupDialog', GroupDialog);
+  .service('GameDialog', GameDialog);

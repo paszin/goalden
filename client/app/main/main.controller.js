@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-    .controller('MainCtrl', function ($scope, $http, $mdMedia, $mdDialog, socket, Auth, User, Game, GroupDialog, FeedbackDialog, NewGameDialog) {
+    .controller('MainCtrl', function ($scope, $http, $mdMedia, $mdDialog, socket, Auth, User, Game, GameDialog, FeedbackDialog, NewGameDialog) {
 
-        $scope.showGroupDialog = GroupDialog.show;
+        $scope.showGameDialog = GameDialog.show;
         $scope.showFeedbackDialog = FeedbackDialog.show;
         $scope.newGameDialog = NewGameDialog.show;
 
