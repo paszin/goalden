@@ -56,7 +56,7 @@ function DialogControllerFeedback($scope, $mdDialog, $http, Auth, game) {
                 }
             }
             if (Object.keys(data).length > 0) {
-                $http.post("api/users/" + Auth.getCurrentUser()._id + "/feedback/" + to_player._id, data);
+                $http.post("api/users/" + Auth.getCurrentUser()._id + "/feedback/" + to_player._id, {"feedback": data});
             }
         }
         //$scope.hide();
