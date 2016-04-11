@@ -16,6 +16,11 @@ function DialogControllerNewGame($scope, $mdDialog, Game) {
         $mdDialog.cancel();
     };
     $scope.answer = function () {
+        $scope.game.date = moment($scope.game.daydate)
+        $scope.game.date.add($scope.game.timehhdate, 'hours').add($scope.game.timemmdate, 'minutes');
+        if (!$scope.is_am && $scope.game.timehhdate < 12) {
+            $scope.game.date.add(12, 'hours');
+        }
         Game.post($scope.game);
     };
 }
