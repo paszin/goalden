@@ -12,6 +12,7 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 router.post('/:gid/users/:uid/join', controller.addUser);
+router.post('/:gid/users/:uid/leave', controller.deleteUser);
 router.get('/users/:uid', controller.showGames);
 
 module.exports = router;
