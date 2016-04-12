@@ -2,6 +2,7 @@
   "name": "goalden-app",
   "version": "0.0.2",
   "main": "server/app.js",
+  "scripts": {"deploy": 'git fetch origin master; git reset --hard FETCH_HEAD; git clean -df; export NODE_ENV="dev"; npm install; bower install; grunt build; export NODE_ENV="production"; export PORT=9000; node dist/server/app.js'},
   "dependencies": {
     "async": "^2.0.0-rc.3",
     "body-parser": "~1.15.0",
