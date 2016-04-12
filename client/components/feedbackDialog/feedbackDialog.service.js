@@ -5,7 +5,7 @@
 function DialogControllerFeedback($scope, $mdDialog, $http, Auth, game) {
     $scope.game = game;
     $scope.roles = ["mentors", "players"];
-    $scope.imgUrl = '/assets/images/person_placeholder.png';
+    $scope.imgUrl = 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png';
     $scope.feedbackOptions = [{
         icon: "fa fa-thumbs-up",
         info: "Great Job",

@@ -9,7 +9,7 @@
 function GameDialogController($scope, $mdDialog, $http, game, User) {
     $scope.game = game;
     
-    $scope.imgUrl = '/assets/images/person_placeholder.png';
+    $scope.imgUrl = 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png';
     
     $scope.showPersonDetails = function (person) {
         

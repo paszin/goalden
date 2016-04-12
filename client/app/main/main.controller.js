@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('goaldenAppApp')
-    .controller('MainCtrl', function ($scope, $http, $mdMedia, $mdDialog, socket, Auth, User, Game, GameDialog, FeedbackDialog, NewGameDialog) {
+    .controller('MainCtrl', ['$scope', '$http', '$mdMedia', '$mdDialog', 'socket', 'Auth', 'User', 'Game', 'GameDialog', 'FeedbackDialog', 'NewGameDialog', function ($scope, $http, $mdMedia, $mdDialog, socket, Auth, User, Game, GameDialog, FeedbackDialog, NewGameDialog) {
 
         $scope.showGameDialog = GameDialog.show;
         $scope.showFeedbackDialog = FeedbackDialog.show;
@@ -53,4 +53,4 @@ angular.module('goaldenAppApp')
 
         $scope.refresh();
 
-    });
+    }]);
