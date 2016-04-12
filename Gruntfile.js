@@ -377,7 +377,14 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.client %>',
         dest: '.tmp/',
         src: ['{app,components}/**/*.css']
+      },
+      fontawesome: {
+          expand: true,
+          cwd: '<%= yeoman.client %>/bower_components/font-awesome/fonts',
+          dest: '<%= yeoman.dist %>/public/fonts',
+          src: ['fontawesome-webfont.*']
       }
+        
     },
 
     buildcontrol: {
@@ -613,6 +620,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'copy:fontawesome',
     'cdnify',
     'cssmin',
     'uglify',
