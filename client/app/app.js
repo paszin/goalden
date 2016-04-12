@@ -9,7 +9,8 @@ angular.module('goaldenAppApp', [
   'btford.socket-io',
   'ui.router',
   'ngMaterial',
-  'angular.filter'
+  'angular.filter',
+  'googlechart'
   //'angular-chartist'
 ]).config(function ($mdThemingProvider) {
         // random colors
