@@ -39,7 +39,6 @@ angular.module('goaldenAppApp')
                 for (var i=0; i<user.feedback.length; i++) {
                     $scope.feedback[user.feedback[i].name] = user.feedback[i].count; 
                 }
-                debugger;
                 $scope.profile = user;
             });
         };
