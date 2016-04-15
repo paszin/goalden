@@ -37,6 +37,20 @@ function DialogControllerFeedback($scope, $mdDialog, $http, Auth, game) {
                     }[!!person[feedback.name]]
                 };
             };
+    
+    $scope.saveDialog = function () {
+                $mdDialog.show({
+                    controller: function ($scope, $mdDialog) {
+                        $scope.cancel = function () {
+                            $mdDialog.cancel();
+                            $location.path('/dashboard');
+                        };
+                    },
+                    clickOutsideToClose: true,
+                    //parent: angular.element('md-content'),
+                    template: '<div layout="column" layout-margin layout-align="center center"><div>Saved</div><md-button ng-click="cancel()">ok</md-button>  </div>'
+                });
+            };
 
 
     $scope.hide = function () {
@@ -57,9 +71,11 @@ function DialogControllerFeedback($scope, $mdDialog, $http, Auth, game) {
             }
             if (Object.keys(data).length > 0) {
                 $http.post("api/users/" + Auth.getCurrentUser()._id + "/feedback/" + to_player._id, {"feedback": data});
+                to_player.feedbackSend = true;
+                to_player.showFeedback = false;
             }
         }
-        //$scope.hide();
+        //$scope.saveDialog();
     };
 }
 
