@@ -17,7 +17,10 @@
         </md-card> -->
         <md-card>
             <h4 layout-padding>Feedback you got</h4>
-            <div google-chart chart="chartObject" style="height:200px; width:100%;"></div>
+            <div ng-repeat="(key, value) in feedback" layout="row" layout-margin>
+            <h5 flex="15">{{lookup(key).info}}</h5> <span ng-repeat="i in [] | range: value"><i class="{{lookup(key).icon}}"></i></span> <span>{{value}}</span>
+            </div>
+            <!--<div google-chart chart="chartObject" style="height:200px; width:100%;"></div>-->
         </md-card>
     </md-content>
 </div>

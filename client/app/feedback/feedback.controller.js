@@ -4,7 +4,29 @@ angular.module('goaldenAppApp')
     .controller('FeedbackCtrl', function ($scope, User) {
 
         $scope.chartObject = {};
+        $scope.feedbackOptions = [{
+            icon: "fa fa-thumbs-up",
+            info: "Great Job",
+            name: "thumps_up"
+        }, {
+            icon: "fa fa-smile-o",
+            info: "Positive Attitude",
+            name: "smile"
+        }, {
+            icon: "fa fa-trophy",
+            info: "Excellent Player",
+            name: "excellent_player"
+        }, {
+            icon: "fa fa-hand-paper-o",
+            info: "Virtual High Five",
+            name: "high_five"
+        }];
+
         $scope.feedback = {thumps_up: 0, smile: 0, excellent_player: 0, high_five: 0};
+    
+        $scope.lookup = function(name) {
+          return _.find($scope.feedbackOptions, {name: name});  
+        };
     
         $scope.chartObject.type = "BarChart";
         $scope.chartObject.options = {

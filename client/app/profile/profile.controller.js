@@ -41,7 +41,7 @@ angular.module('goaldenAppApp')
                     //parent: angular.element('md-content'),
                     template: '<div layout="column" layout-margin layout-align="center center"><div>Saved</div><md-button ng-click="cancel()">ok</md-button>  </div>'
                 });
-            }
+            };
 
 
                 $scope.save = function () {
