@@ -1,7 +1,6 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var AutoIncrement = require("mongoose-sequence");
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
@@ -55,10 +54,6 @@ var UserSchema = new Schema({
   github: {}
 });
 
-
-UserSchema.plugin(AutoIncrement, {
-  inc_field: "id"
-});
 
 /**
  * Virtuals

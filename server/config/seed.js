@@ -15,7 +15,6 @@ var Group = require('../api/group/group.model');
 User.find({}).remove(function() {
   User.create({
       provider: 'local',
-      id: 1,
       name: 'Genki',
       email: 'genki@test.com',
       sex: "female",
@@ -55,6 +54,7 @@ User.find({}).remove(function() {
       name: 'Momo',
       email: 'momo@test.com',
       sex: "female",
+      role: "admin",
       is_mentor: true,
       age: 35,
       password: 'momo',
