@@ -15,13 +15,26 @@ function DialogControllerNewGame($scope, $mdDialog, Game) {
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
+    $scope.saveDialog = function () {
+                $mdDialog.show({
+                    controller: function ($scope, $mdDialog) {
+                        $scope.cancel = function () {
+                            $mdDialog.cancel();
+                            //$location.path('/dashboard');
+                        };
+                    },
+                    clickOutsideToClose: true,
+                    //parent: angular.element('md-content'),
+                    template: '<div layout="column" layout-margin layout-align="center center"><div>Game created</div><md-button ng-click="cancel()">ok</md-button>  </div>'
+                });
+            };
     $scope.answer = function () {
         $scope.game.date = moment($scope.game.daydate)
         $scope.game.date.add($scope.game.timehhdate, 'hours').add($scope.game.timemmdate, 'minutes');
         if (!$scope.is_am && $scope.game.timehhdate < 12) {
             $scope.game.date.add(12, 'hours');
         }
-        Game.post($scope.game);
+        Game.post($scope.game, $scope.saveDialog);
     };
 }
 
