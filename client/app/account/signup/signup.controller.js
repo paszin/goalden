@@ -6,6 +6,7 @@ angular.module('goaldenAppApp')
         $scope.errors = {};
 
         $scope.isMentor = $location.search()["mentor"] && $location.search()["code"] === "CA1REB";
+        $scope.role = $location.search()["role"];
 
         $scope.register = function (form) {
             $scope.submitted = true;
@@ -15,7 +16,8 @@ angular.module('goaldenAppApp')
                         name: $scope.user.name,
                         email: $scope.user.email,
                         password: $scope.user.password,
-                        is_mentor: $scope.isMentor
+                        is_mentor: $scope.isMentor,
+                        role: $scope.role || "user"
                     })
                     .then(function () {
                         // Account created, redirect to home
