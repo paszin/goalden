@@ -1,6 +1,7 @@
 {
   "name": "goalden-app",
   "version": "0.0.2",
+  "license": "CC BY NC SA",
   "main": "server/app.js",
   "dependencies": {
     "async": "^2.0.0-rc.3",
